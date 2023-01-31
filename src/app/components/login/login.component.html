@@ -1,111 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIG Edu-Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <title>BIG Edu-Login</title>    
 </head>
 
 <body>
-
-
-    
-
-    <div class="container">
-    <div id="navbar">
-        <a href="" class="logo">BIG Edu</a>
-        <ul>
-            <li><a href="../../../../index.php" class="logo">inicio</a></li>
-            <!--<li><a href="../quienessomos.php" class="active">Quienes Somos</a></li>-->
-        </ul>
-        <span class="menuIcon" onclick="toggleMenu();"></span>
-    </div>
-    </div>
-
+        <div class="container" style="width: 100%;">
+            <button class="btn btn-primary" routerLink="" name="Big Edu">Big Edu</button>
+        </div>
     <main>
-    <div class="contenedor__todo">
-            <div class="caja__trasera">
-                    <div class="caja__trasera-login">
-                        <h3>¿Ya tienes una cuenta?</h3>
-                        <p>Inicia sesión para entrar en la página</p>
-                        <button id="btn__iniciar-sesion">Iniciar Sesión</button>
+        <div class="contenedor__login-register">
+            <form  class="formulario__login" id="formlg" #UserForm="ngForm" (ngSubmit)="LoginUser(UserForm)">
+                <h2>Iniciar Sesión</h2>
+                <div class="row align-items-stretch mb-5">
+                    <div class="col-md-12">
+    
+                         <div class="form-group">
+                            <!-- <label>Usuario:</label> -->
+                            <input class="form-control" name="Nickname" #Nickname="ngModel" [(ngModel)]="login.nickname" type="text" placeholder="Usuario " required="required" data-validation-required-message="Ingrese su usuario" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <!-- <label>Contraseña:</label> -->
+                            <input class="form-control" name="contraseña" #Nickname="ngModel" [(ngModel)]="login.passuser" type="password" placeholder="Contraseña " required="required" data-validation-required-message="Ingrese su contraseña" autocomplete="current-password"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        
                     </div>
-                    <div class="caja__trasera-register">
-                        <h3>¿Aún no tienes una cuenta?</h3>
-                        <p>Regístrate para que puedas iniciar sesión</p>
-                        <button id="btn__registrarse">Regístrarse</button>
-                    </div>
-            </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-xl text-uppercase" name="login">Ingresar</button>
+                </div>
+            </form>
+        </div>
 
-
-            <!--Formulario de Login y registro-->
-            <div class="contenedor__login-register">
-
-                <!--Login-->
-
-                <form method="post" action="" class="formulario__login">
-                    <h2>Iniciar Sesión</h2>
-                    <input type="email" class="validate" name="correoI" placeholder="Correo Electrónico" required>
-                    <input type="password" name="claveI" placeholder="Contraseña" required>
-                    <input type="submit" value="Ingresar" >
-                
-
-                </form>
-        
-	
-                <!--Register-->
-                <form action="" method="POST" class="formulario__register">
-                    <h2>Regístrarse</h2>
-                    <input type="text" placeholder="Nombre completo" name="nombrecompletoR" required >
-                    <input type="text" placeholder="Identificación" name="identificacionR" required >
-                    <input type="email" placeholder="Correo Electronico" name="correoR"  required>
-                    <input type="text" placeholder="Username" name="usernameR" required >
-                    <input type="password" placeholder="Contraseña" name="claveR" required>
-                    <input type="password" placeholder="Confirme contraseña" name="claveRC" required>
-                    <div class="container">
-                    <input type="hidden" name="perfilR" value="usuario">
-                    <input type="submit" name="submitR" value="Registrar" >
-                    </div>
-                </form>
-            </div>      
-    </div>
     </main>
 
-    <div class="pie">
-		<h2 class="follow-us">BIG Edu</h2>
-		<div class="mail">
-			<i class='bx bx-mail-send'></i>
-			<p>bigedu@gmail.com</p>
-		</div>
-		<div class="contenedor-footer">
-			<div class="content-foo">
-				<a href="https://www.facebook.com/" class="social-media"><i class='bx bxl-facebook-circle'></i></a>
-			</div>
-			<div class="content-foo">
-				<a href="https://www.instagram.com/" class="social-media"><i class='bx bxl-instagram-alt'></i></a>
-			</div>
-			<div class="content-foo">
-				<a href="https://twitter.com/" class="social-media"><i class='bx bxl-twitter' ></i></a>
-			</div>
-		</div>
-		<div class="copy">
-			<div class="col s2"> © <?php echo date('Y'); ?> Copyright | BIG Edu</div></div>
-		</div>
-    </body>
-<script src="assets/js/script.js"></script>
-<?php
-require_once '../../../../controlador/usuarioC.php';
-require_once '../../../../modelo/usuarioM.php';
-$signup= new UserC();
-$signup-> RegistrarUserC();
-?>
-<?php
-require_once '../../../../controlador/adminC.php';
-require_once '../../../../modelo/adminM.php';
-    $ingreso = new AdminC();
-    $ingreso -> IngresoC(); 
-?>
-</html>
+    <div class="pie" style="width: 100%;">
+        <h2 class="follow-us">BIG Edu</h2>
+        <div class="mail">
+            <i class='bx bx-mail-send'></i>
+            <p>aitageoenlaweb@gmail.com</p>
+        </div>
+        <div class="contenedor-footer">
+            <div class="content-foo">
+                <a href="https://www.facebook.com/" class="social-media"><i class='bx bxl-facebook-circle'></i></a>
+            </div>
+            <div class="content-foo">
+                <a href="https://www.instagram.com/" class="social-media"><i class='bx bxl-instagram-alt'></i></a>
+            </div>
+            <div class="content-foo">
+                <a href="https://twitter.com/" class="social-media"><i class='bx bxl-twitter'></i></a>
+            </div>
+        </div>
+        <div class="copy">
+            <div class="col s2"> © Copyright | BIG Edu</div>
+        </div>
+    </div>
+</body>
