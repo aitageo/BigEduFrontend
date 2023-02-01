@@ -7,13 +7,15 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { LiderComponent } from './components/lider/lider.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    LiderComponent
+    LiderComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

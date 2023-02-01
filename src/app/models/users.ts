@@ -13,7 +13,8 @@ export class Users {
 export class Login {
   constructor(
     public nickname:String,
-    public passuser:String
+    public passuser:String,
+    public getToken:boolean
 
   ){}
 }

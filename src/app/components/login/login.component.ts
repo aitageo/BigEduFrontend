@@ -12,20 +12,21 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   public title:string
   public login : Login
+  public token:string
 
   constructor(private _userService:UsersService,private auth:AuthService,private router:Router) {
     this.title = "Usuario logueado";
-    this.login = new Login('','')
+    this.login = new Login('','',true);
+    this.token = "";
    }
 
   ngOnInit(): void {
     
   }
 
-  goRegistro(){
-   this.router.navigate(['registro'])
-  }
-
+  // goRegistro(){
+  //  this.router.navigate(['registro'])
+  // }
 
   LoginUser(form:any){
     console.log(this.login);
@@ -33,14 +34,23 @@ export class LoginComponent implements OnInit {
       response =>{
         console.log(response);
         console.log("Usuario Logueado"); 
-        this.router.navigate(['lider'])
+        this.router.navigate(['lider']);
+        this.token = response.token;
+        this.getToken()
       },
-      err =>{
-        console.error(err);
-        
-      }
+      err=>console.error(err)
     )
   }
+
+  getToken(){
+    return this.token
+  }
+
+  destroyToken(){
+    this.token = ""
+    return this.token
+  }
+
 
 }
 
