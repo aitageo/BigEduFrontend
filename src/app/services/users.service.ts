@@ -4,15 +4,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { global } from './global';
 import { application, response } from 'express';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
   public url: string;
+  public token:any;
 
-  constructor(private _http:HttpClient) { 
+  constructor(private _http:HttpClient,private router:Router) { 
     this.url = global.url;
+    this.token = "";
   }
 
 
@@ -25,12 +28,32 @@ saveUser(user:Users):Observable<any>{
 
 }
 
-Login(login:Login):Observable<any>{
+Login(login:Login){
   let params = JSON.stringify(login);
   let headers = new HttpHeaders().set('Content-Type','application/json');
 
-  return this._http.post(this.url+'/usuario/login/',params,{headers:headers})
+   this._http.post(this.url+'/usuario/login/',params,{headers:headers}).subscribe(
+    response =>{
+      console.log(response);
+      console.log("Usuario Logueado"); 
+      this.router.navigate(['lider']);
+      this.token = this.token;
+      this.getToken()
+    },
+    err=>console.error(err)
+   )
 }
 
-  
+getToken(){
+  return this.token
+}
+
+destroyToken(){
+  this.token = ""
+  this.router.navigate(['login'])
+  return this.token
+
+}
+
+
 }

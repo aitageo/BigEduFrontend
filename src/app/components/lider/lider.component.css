@@ -76,6 +76,10 @@ Sidebar Nav
   Hover
   ----------------*/
 }
+
+a {
+  cursor: pointer;
+}
 .sidebar-nav ul {
   list-style: none;
   display: block;

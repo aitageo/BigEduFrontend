@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { LiderComponent } from './components/lider/lider.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { UsersService } from './services/users.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     HttpClientModule,
     
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

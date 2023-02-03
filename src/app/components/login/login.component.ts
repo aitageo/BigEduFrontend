@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Login } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
-import { AuthService } from 'src/app/services/auth.service';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   public login : Login
   public token:string
 
-  constructor(private _userService:UsersService,private auth:AuthService,private router:Router) {
+  constructor(private _userService:UsersService,private router:Router) {
     this.title = "Usuario logueado";
     this.login = new Login('','',true);
     this.token = "";
@@ -24,31 +24,11 @@ export class LoginComponent implements OnInit {
     
   }
 
-  // goRegistro(){
-  //  this.router.navigate(['registro'])
-  // }
+  
 
   LoginUser(form:any){
     console.log(this.login);
-    this._userService.Login(this.login).subscribe(
-      response =>{
-        console.log(response);
-        console.log("Usuario Logueado"); 
-        this.router.navigate(['lider']);
-        this.token = response.token;
-        this.getToken()
-      },
-      err=>console.error(err)
-    )
-  }
-
-  getToken(){
-    return this.token
-  }
-
-  destroyToken(){
-    this.token = ""
-    return this.token
+    this._userService.Login(this.login)
   }
 
 
