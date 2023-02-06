@@ -5,6 +5,7 @@ import { global } from './global';
 import { application, response } from 'express';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UsersService {
   public url: string;
   public token:any;
 
-  constructor(private _http:HttpClient,private router:Router) { 
+  constructor(private _http:HttpClient,private router:Router,private cookie:CookieService) { 
     this.url = global.url;
     this.token = "";
   }
@@ -37,7 +38,8 @@ Login(login:Login){
       console.log(response);
       console.log("Usuario Logueado"); 
       this.router.navigate(['lider']);
-      this.token = this.token;
+      this.token = response
+      this.cookie.set("token",this.token)
       this.getToken()
     },
     err=>console.error(err)
@@ -45,12 +47,21 @@ Login(login:Login){
 }
 
 getToken(){
-  return this.token
+
+  return this.token;
+}
+
+logged(){
+  return this.token;
+
 }
 
 destroyToken(){
   this.token = ""
+  this.cookie.set("token",this.token)
   this.router.navigate(['login'])
+  console.log("token eliminado");
+  
   return this.token
 
 }

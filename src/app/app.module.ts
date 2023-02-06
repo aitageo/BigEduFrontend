@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { LiderComponent } from './components/lider/lider.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UsersService } from './services/users.service';
+import { CookieService } from 'ngx-cookie-service';
+import { InstructorComponent } from './components/instructor/instructor.component';
+import { LoginGuard } from './guardians/login.guard';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import { UsersService } from './services/users.service';
     LoginComponent,
     HomeComponent,
     LiderComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    InstructorComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,7 @@ import { UsersService } from './services/users.service';
     HttpClientModule,
     
   ],
-  providers: [UsersService],
+  providers: [UsersService,CookieService,LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
