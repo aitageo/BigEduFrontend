@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Login } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-lider',
@@ -18,7 +19,27 @@ export class LiderComponent implements OnInit {
   }
 
   destroyToken(){
-    this.userservice.destroyToken()
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+
+      // confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Se cerrara la sesion!',
+          'success'
+        )
+        setTimeout(() => {
+          this.userservice.destroyToken()
+        }, 2500);
+      }
+    })
+    
+    
+   
     }
 
 

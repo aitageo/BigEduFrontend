@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { LiderComponent } from './components/lider/lider.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UsersService } from './services/users.service';
-import { CookieService } from 'ngx-cookie-service';
+
 import { InstructorComponent } from './components/instructor/instructor.component';
 import { LoginGuard } from './guardians/login.guard';
 
@@ -29,7 +29,7 @@ import { LoginGuard } from './guardians/login.guard';
     HttpClientModule,
     
   ],
-  providers: [UsersService,CookieService,LoginGuard],
+  providers: [UsersService,LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
