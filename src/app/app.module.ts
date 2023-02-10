@@ -12,6 +12,7 @@ import { UsersService } from './services/users.service';
 
 import { InstructorComponent } from './components/instructor/instructor.component';
 import { LoginGuard } from './guardians/login.guard';
+import { MapaComponent } from './components/mapa/mapa.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoginGuard } from './guardians/login.guard';
     HomeComponent,
     LiderComponent,
     NotFoundComponent,
-    InstructorComponent
+    InstructorComponent,
+    MapaComponent
   ],
   imports: [
     BrowserModule,

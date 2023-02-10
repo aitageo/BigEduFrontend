@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     Swal.fire({
       // position: 'top-end',
       icon: 'success',
-      title: 'Bienvenido a la web',
+      title: 'Bienvenido a Big Edu',
       showConfirmButton: false,
       timer: 1200
     })

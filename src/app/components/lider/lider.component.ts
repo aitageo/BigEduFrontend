@@ -18,9 +18,14 @@ export class LiderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  Modal(e:any){
+    e.preventDefault()
+    alert("pinchaste")
+  }
+
   destroyToken(){
     Swal.fire({
-      title: 'Are you sure?',
+      title: 'Esta usted Seguro?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

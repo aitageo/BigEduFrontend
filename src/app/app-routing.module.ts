@@ -7,6 +7,7 @@ import { LiderComponent } from './components/lider/lider.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { InstructorComponent } from './components/instructor/instructor.component';
 import { LoginGuard } from './guardians/login.guard';
+import { MapaComponent } from './components/mapa/mapa.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'lider',component:LiderComponent,canActivate:[LoginGuard]},
   {path:'instructor',component:InstructorComponent},
+  {path:'Mapa',component:MapaComponent},
   {path:'**',component:NotFoundComponent},
 
 ];
