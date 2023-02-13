@@ -9,13 +9,15 @@ import { InstructorComponent } from './components/instructor/instructor.componen
 import { LoginGuard } from './guardians/login.guard';
 import { MapaComponent } from './components/mapa/mapa.component';
 
+
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'home',component:HomeComponent},
   {path:'login',component:LoginComponent},
-  {path:'lider',component:LiderComponent,canActivate:[LoginGuard]},
+  {path:'lider',component:LiderComponent},
   {path:'instructor',component:InstructorComponent},
   {path:'Mapa',component:MapaComponent},
+  
   {path:'**',component:NotFoundComponent},
 
 ];

@@ -14,6 +14,8 @@ import { InstructorComponent } from './components/instructor/instructor.componen
 import { LoginGuard } from './guardians/login.guard';
 import { MapaComponent } from './components/mapa/mapa.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,10 @@ import { MapaComponent } from './components/mapa/mapa.component';
     LiderComponent,
     NotFoundComponent,
     InstructorComponent,
-    MapaComponent
+    MapaComponent,
+   
+
+  
   ],
   imports: [
     BrowserModule,

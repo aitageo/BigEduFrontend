@@ -18,11 +18,6 @@ export class LiderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  Modal(e:any){
-    e.preventDefault()
-    alert("pinchaste")
-  }
-
   destroyToken(){
     Swal.fire({
       title: 'Esta usted Seguro?',
