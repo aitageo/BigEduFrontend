@@ -14,7 +14,7 @@ const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'home',component:HomeComponent},
   {path:'login',component:LoginComponent},
-  {path:'lider',component:LiderComponent},
+  {path:'lider',component:LiderComponent,canActivate:[LoginGuard]},
   {path:'instructor',component:InstructorComponent},
   {path:'Mapa',component:MapaComponent},
   

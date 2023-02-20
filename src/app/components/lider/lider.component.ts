@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Login } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2'
+import * as L from 'leaflet';
+
+import { marker } from 'leaflet';
 
 @Component({
   selector: 'app-lider',
@@ -16,6 +19,11 @@ export class LiderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const map = L.map('map').setView([6.2486069, -75.5742467], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 17,
+      attribution: 'Map data © OpenStreetMap contributors'
+    }).addTo(map);
   }
 
   destroyToken(){

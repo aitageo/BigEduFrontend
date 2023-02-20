@@ -2,20 +2,25 @@
   --primary: #111B54;
   --light: #ffffff;
   --grey: #efefef;
+  --green : #5EB319;
 }
 
 body {
   overflow: hidden;
   font-family: 'Muli', sans-serif;
   font-weight: 300;
-  color: var(--primary);
+  color: var(--green);
+}
+
+h1 {
+  text-align: center;
 }
 
 a:hover {
   text-decoration: none;
 }
 
-.bg-primary { background-color: var(--primary) !important; }
+.bg-primary { background-color: var( --green) !important; }
 
 .bg-light { background-color: var(--light) !important; }
 
@@ -24,12 +29,12 @@ a:hover {
 .bg-mix { background: linear-gradient(180deg, var(--light) 50%, var(--grey) 0); }
 
 .btn-primary {
-  background-color: var(--primary);
+  background-color: var(--green);
   border: 0;
 }
 
 .btn-primary:hover {
-  background-color: var(--primary);
+  color: var(--light);
 }
 
 #sidebar-container {
