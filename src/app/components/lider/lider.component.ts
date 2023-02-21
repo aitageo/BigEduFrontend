@@ -3,8 +3,10 @@ import { Login } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2'
 import * as L from 'leaflet';
+import { Institucion } from 'src/app/models/institucion';
 
 import { marker } from 'leaflet';
+import { MapaService } from 'src/app/services/mapa.service';
 
 @Component({
   selector: 'app-lider',
@@ -13,9 +15,17 @@ import { marker } from 'leaflet';
 })
 export class LiderComponent implements OnInit {
   public token:string
+  public longitud : number
+  public latitud : number
+  // public nombre_institucion : string
+  public Institucion :Institucion 
 
-  constructor(private userservice:UsersService) { 
-    this.token = ""
+  constructor(private userservice:UsersService,private mapaservice:MapaService,private _userService:UsersService) { 
+    this.token = "";
+    this.longitud = 0
+    this.latitud = 0
+    // this.nombre_institucion = "";
+    this.Institucion = new Institucion("","","","",0,0);
   }
 
   ngOnInit(): void {
@@ -24,7 +34,28 @@ export class LiderComponent implements OnInit {
       maxZoom: 17,
       attribution: 'Map data © OpenStreetMap contributors'
     }).addTo(map);
+
+    const mymap = L.map('map').setView([6.2486069,-75.5742467 ], 12);
+    const marker = this.mapaservice.agregarMarcador(this.latitud, this.longitud, "Mi marcador");
+    marker.addTo(mymap);
+
   }
+
+  saveInstitution(form:any){
+    console.log(this.Institucion);
+    this._userService.saveInstitution(this.Institucion)
+    Swal.fire({
+      // position: 'top-end',
+      icon: 'success',
+      title: 'Registro Guardado',
+      //showConfirmButton: false,
+      timer: 200
+    })
+
+  }
+
+
+
 
   destroyToken(){
     Swal.fire({

@@ -47,41 +47,41 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form  #RegisInsti="ngForm" (ngSubmit)="saveInstitution(RegisInsti)">
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" id="form6Example1" class="form-control" placeholder="Nombre Institucion" />
+                <input type="text" id="form6Example1" class="form-control" placeholder="Nombre Institucion" name="Nombre Institucion" [(ngModel)]="Institucion.nombre_institucion" />
               </div>
             </div>
           </div>
           <!-- Text input -->
           <div class="form-outline mb-4">
-            <input type="text" id="form6Example3" class="form-control" placeholder="Nombre Coordinador" />
+            <input type="text" id="form6Example3" class="form-control" placeholder="Nombre Coordinador" name="Nombre Coordinador" [(ngModel)]="Institucion.nombre_coordinador"  />
           </div>
         
           <!-- Text input -->
           <div class="form-outline mb-4">
-            <input type="text" id="form6Example4" class="form-control" placeholder="Nombre Rector"/>
+            <input type="text" id="form6Example4" class="form-control" placeholder="Nombre Rector" name="Nombre Rector" [(ngModel)]="Institucion.nombre_rector" />
           </div>
         
           <!-- Email input -->
-          <div class="form-outline mb-4">
+          <!-- <div class="form-outline mb-4">
             <input type="email" id="form6Example5" class="form-control" placeholder="Email"/>
-          </div>
+          </div> -->
         
           <!-- Number input -->
           <div class="form-outline mb-4">
-            <input type="number" id="form6Example6" class="form-control" placeholder="Telefono" />
+            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono" name="Telefono" [(ngModel)]="Institucion.telefono_ie" />
           </div>
           <div class="form-outline mb-4">
-            <input type="number" id="form6Example6" class="form-control" placeholder="Latitud" />
+            <input type="number" id="form6Example6" class="form-control" placeholder="Latitud" name="Latitud" [(ngModel)]="Institucion.lat" [(ngModel)]="latitud" />
           </div>
           <div class="form-outline mb-4">
-            <input type="number" id="form6Example6" class="form-control" placeholder="Longitud" />
+            <input type="number" id="form6Example6" class="form-control" placeholder="Longitud" name="Longitud" [(ngModel)]="Institucion.lng" [(ngModel)]="longitud" />
           </div>
           <!-- Submit button -->
-          <button type="submit" class="btn btn-primary btn-block mb-4">Guardar</button>
+          <button type="submit" class="btn btn-primary btn-block mb-4" name="guardar">Guardar</button>
                        </form>
                   </div>
               </div>
