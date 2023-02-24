@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Login } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
+import { AuthInterceptorServiceService } from 'src/app/services/auth-interceptor-service.service';
 import Swal from 'sweetalert2'
 import * as L from 'leaflet';
+
 import { Institucion } from 'src/app/models/institucion';
 
 import { marker } from 'leaflet';
@@ -20,7 +21,8 @@ export class LiderComponent implements OnInit {
   // public nombre_institucion : string
   public Institucion :Institucion 
 
-  constructor(private userservice:UsersService,private mapaservice:MapaService,private _userService:UsersService) { 
+  constructor(private userservice:UsersService,private mapaservice:MapaService,private _userService:UsersService,
+    private interceptor:AuthInterceptorServiceService) { 
     this.token = "";
     this.longitud = 0
     this.latitud = 0
@@ -35,9 +37,9 @@ export class LiderComponent implements OnInit {
       attribution: 'Map data © OpenStreetMap contributors'
     }).addTo(map);
 
-    const mymap = L.map('map').setView([6.2486069,-75.5742467 ], 12);
+    // const mymap = L.map('map').setView([6.2486069,-75.5742467 ], 12);
     const marker = this.mapaservice.agregarMarcador(this.latitud, this.longitud, "Mi marcador");
-    marker.addTo(mymap);
+    marker.addTo(map);
 
   }
 
