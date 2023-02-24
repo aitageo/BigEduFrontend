@@ -18,46 +18,61 @@ export class LiderComponent implements OnInit {
   public token:string
   public longitud : number
   public latitud : number
-  // public nombre_institucion : string
   public Institucion :Institucion 
+  public map:any;
+  public marker:any;
 
-  constructor(private userservice:UsersService,private mapaservice:MapaService,private _userService:UsersService,
-    private interceptor:AuthInterceptorServiceService) { 
+  constructor(
+    private userservice:UsersService,
+    private mapaservice:MapaService,
+    private _userService:UsersService,
+    private interceptor:AuthInterceptorServiceService
+  ) { 
     this.token = "";
     this.longitud = 0
     this.latitud = 0
-    // this.nombre_institucion = "";
     this.Institucion = new Institucion("","","","",0,0);
   }
 
   ngOnInit(): void {
-    const map = L.map('map').setView([6.2486069, -75.5742467], 12);
+    this.initMap();
+  }
+
+  private initMap() {
+    this.map = L.map('map').setView([6.2486069, -75.5742467], 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 17,
       attribution: 'Map data © OpenStreetMap contributors'
-    }).addTo(map);
+    }).addTo(this.map);
 
-    // const mymap = L.map('map').setView([6.2486069,-75.5742467 ], 12);
-    const marker = this.mapaservice.agregarMarcador(this.latitud, this.longitud, "Mi marcador");
-    marker.addTo(map);
-
+    this.marker = this.mapaservice.agregarMarcador(
+      parseFloat(this.Institucion.lat.toString()), 
+      parseFloat(this.Institucion.lng.toString()), 
+      "Mi marcador"
+    );
+    this.marker.addTo(this.map);
   }
 
   saveInstitution(form:any){
     console.log(this.Institucion);
     this._userService.saveInstitution(this.Institucion)
     Swal.fire({
-      // position: 'top-end',
       icon: 'success',
       title: 'Registro Guardado',
-      //showConfirmButton: false,
-      timer: 200
-    })
-
+      timer: 1200
+    });
+    // Obtener las coordenadas del marcador
+    const lat = this.Institucion.lat;
+    const lng = this.Institucion.lng;
+    
+    // Mover el marcador a las nuevas coordenadas
+    this.marker.setLatLng([parseFloat(lat.toString()), parseFloat(lng.toString())]);
+    
+    // Centrar el mapa en las nuevas coordenadas del marcador
+    this.map.setView([parseFloat(lat.toString()), parseFloat(lng.toString())], 15);
+    
+    form.reset();
   }
-
-
-
 
   destroyToken(){
     Swal.fire({
@@ -65,8 +80,6 @@ export class LiderComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-
-      // confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
