@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Login } from 'src/app/models/users';
+import { Login, Users } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
@@ -13,11 +13,13 @@ export class LoginComponent implements OnInit {
   public title:string
   public login : Login
   public token:string
+  public message: boolean;
 
   constructor(private _userService:UsersService,private router:Router) {
     this.title = "Usuario logueado";
     this.login = new Login('','',true);
     this.token = "";
+    this.message = false;
    }
 
   ngOnInit(): void {
@@ -26,17 +28,21 @@ export class LoginComponent implements OnInit {
 
   
 
-  LoginUser(form:any){
+  LoginUser(form: any) {
     console.log(this.login);
-    this._userService.Login(this.login)
-    Swal.fire({
-      // position: 'top-end',
-      icon: 'success',
-      title: 'Bienvenido a Big Edu',
-      showConfirmButton: false,
-      timer: 1200
-    })
+    this._userService.Login(this.login);
+    if (this._userService.getErrorMessage()) {
+      this.message = true;
+      this.router.navigate(['login']);
+  
+    } else {
+      this.message = false;
+      this.router.navigate(['lider']);
+      form.reset()
+    
+    }
   }
+
 
 
 }

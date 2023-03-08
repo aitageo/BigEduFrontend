@@ -28,8 +28,8 @@
               <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                   <h2 class="text-light font-weight-bold mb-0" id="headingOne">
-                    <button class="accordion-button collapsed bg-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      <i class="icon ion-md-school"></i>&nbsp;Instituciones educativas
+                    <button class="accordion-button collapsed btn-primary text-light" style="border:color#5EB319, solid" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      <i class="icon ion-md-school">Instituciones educativas</i>&nbsp;
                     </button>
                   </h2>
                   <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -47,22 +47,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form  #RegisInsti="ngForm" (ngSubmit)="saveInstitution(RegisInsti)">
+        <form  #RegisInsti="ngForm" (ngSubmit)="saveInstitution(RegisInsti)" [formGroup]="form">
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" id="form6Example1" class="form-control" placeholder="Nombre Institucion" name="Nombre Institucion" [(ngModel)]="Institucion.nombre_institucion" />
+                <input type="text" id="form6Example1" class="form-control" placeholder="Nombre Institucion" name="Nombre Institucion" [(ngModel)]="Institucion.nombre_institucion" [(ngModel)]="nombre" formControlName="Nombre_Institucion"/>
               </div>
             </div>
           </div>
           <!-- Text input -->
           <div class="form-outline mb-4">
-            <input type="text" id="form6Example3" class="form-control" placeholder="Nombre Coordinador" name="Nombre Coordinador" [(ngModel)]="Institucion.nombre_coordinador"  />
+            <input type="text" id="form6Example3" class="form-control" placeholder="Nombre Coordinador" name="Nombre Coordinador" [(ngModel)]="Institucion.nombre_coordinador" formControlName="Nombre_Coordinador" />
           </div>
         
           <!-- Text input -->
           <div class="form-outline mb-4">
-            <input type="text" id="form6Example4" class="form-control" placeholder="Nombre Rector" name="Nombre Rector" [(ngModel)]="Institucion.nombre_rector" />
+            <input type="text" id="form6Example4" class="form-control" placeholder="Nombre Rector" name="Nombre Rector" [(ngModel)]="Institucion.nombre_rector" formControlName="Nombre_Rector" />
           </div>
         
           <!-- Email input -->
@@ -72,17 +72,19 @@
         
           <!-- Number input -->
           <div class="form-outline mb-4">
-            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono" name="Telefono" [(ngModel)]="Institucion.telefono_ie" />
+            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono" name="Telefono" [(ngModel)]="Institucion.telefono_ie"  formControlName="Telefono"/>
           </div>
           <div class="form-outline mb-4">
-            <input type="number" id="form6Example6" class="form-control" placeholder="Latitud" name="Latitud" [(ngModel)]="Institucion.lat" [(ngModel)]="latitud" />
+            <input type="number" id="form6Example6" class="form-control" placeholder="Latitud" name="Latitud" [(ngModel)]="Institucion.lat" [(ngModel)]="latitud" formControlName="Latitud" />
           </div>
           <div class="form-outline mb-4">
-            <input type="number" id="form6Example6" class="form-control" placeholder="Longitud" name="Longitud" [(ngModel)]="Institucion.lng" [(ngModel)]="longitud" />
+            <input type="number" id="form6Example6" class="form-control" placeholder="Longitud" name="Longitud" [(ngModel)]="Institucion.lng" [(ngModel)]="longitud" formControlName="Longitud" />
           </div>
-          <!-- Submit button -->
-          <button type="submit" class="btn btn-primary btn-block mb-4" name="guardar">Guardar</button>
+          <div class="text-center btn-toolbar">
+          <!-- Submit button --  btn-block mb-4 para que se vea en bloque----->
+          <button type="submit" class="btn btn-success" name="guardar"  [disabled]="!form.valid">Guardar</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
                        </form>
                   </div>
               </div>
@@ -93,11 +95,11 @@
           </div>
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed bg-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <button class="accordion-button collapsed btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                       <i class="icon ion-md-stats lead mr-2"></i> Programas
                     </button>
                   </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <div id="collapseTwo" class="accordion-collapse collapse btn-primary " aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                       Registrar Nuevo Programa
                     </div>
@@ -105,18 +107,18 @@
                 </div>
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed bg-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <button class="accordion-button collapsed  btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                       <i class="icon ion-md-person mr-2"></i>&nbsp;Instructor
                     </button>
                   </h2>
-                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                  <div id="collapseThree" class="accordion-collapse collapse  btn-primary" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                       Registrar Nueva Programa
                     </div>
                   </div>
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingFour">
-                      <button class="accordion-button collapsed bg-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                      <button class="accordion-button collapsed  btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         <i class="icon ion-md-bookmarks"></i>&nbsp;Fichas
                       </button>
                     </h2>
@@ -129,7 +131,7 @@
                 </div>
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingFive">
-                    <button class="accordion-button collapsed bg-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    <button class="accordion-button collapsed  btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                       <i class="icon ion-md-filing"></i>&nbsp; Formatos
                     </button>
                   </h2>
@@ -184,30 +186,65 @@
                       </div>
                   </div>
               </section>
-
-              <section class="bg-mix py-3">
+              <!---Todas las instituciones-->
                 <div class="container">
+              
                   
                 </div>
-              </section>
-
               <section>
-                  <div class="container">
-                      <div class="row">
-                          <div class="col-lg-8 my-3">
-                              <div class="card rounded-0">
-                                  <div class="card-header bg-light">
-                                    <h6 class="font-weight-bold mb-0"></h6>
-                                  </div>
-                                  <div class="card-body">
-                                  <div id="map" style="height: 650px; width: 100%;"></div>
-                                  </div>
-                            </div>
-                          </div>
+                <div class="container" style="width: 90%;margin-left:0%">
+                  <div class="row" style="display: flex;">
+                    <div class="col-lg-6 my-3">
+                      <div class="card rounded-0">
+                        <div class="card-header bg-light">
+                          <h6 class="font-weight-bold mb-0">GeoReferenciacion</h6>
+                        </div>
+                        <div class="card-body">
+                          <div id="map" style="height: 300px; width: 100%;"></div>
+                        </div>
                       </div>
+                    </div>
+                    <div class="col-lg-6 my-3">
+                      <div class="card rounded-0">
+                        <div class="card-header bg-light">
+                          <h6 class="font-weight-bold mb-0">Datos De Intituciones</h6>
+                        </div>
+                        <div class="card-body">
+                          <div>    
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>Nombre Institución</th>
+                                  <!-- <th>latitud</th> -->
+                                  <th>Telefono</th>
+                                  <th>Acciones</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let institucion of institutionsList">
+                                  <td>{{ institucion.nombre_institucion }}</td>
+                                  <!-- <td>{{ institucion.ubicacion_geografica.lat }}</td> -->
+                                  <!-- <td>{{ institucion.ubicacion_geografica.lng }}</td> -->
+                                  <td>{{institucion.telefono_ie}}</td>
+                                  <td>
+                                    <div class="d-flex flex-row">
+                                      <button type="button" class="btn btn-primary mx-1 btn-sm">Editar</button>
+                                      <button type="button" class="btn btn-danger mx-1 btn-sm">Eliminar</button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            
+                        </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                </div>
               </section>
-
+              
         </div>
 
         </div>

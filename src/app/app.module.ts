@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LiderComponent } from './components/lider/lider.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UsersService } from './services/users.service';
@@ -26,6 +27,7 @@ import { MapaComponent } from './components/mapa/mapa.component';
     NotFoundComponent,
     InstructorComponent,
     MapaComponent,
+    
    
 
   
@@ -35,6 +37,7 @@ import { MapaComponent } from './components/mapa/mapa.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     
   ],
   providers: [

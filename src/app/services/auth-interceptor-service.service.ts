@@ -12,7 +12,7 @@ export class AuthInterceptorServiceService implements HttpInterceptor {
   constructor(private cookieservice:CookieService,private tokenService: TokenService ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    // Obtener el token de autenticación del servicio UsersService
+    // Obtener el token de autenticación del servicio TokenService
     const token = this.tokenService.getToken();
     console.log(token);
     if (token) {

@@ -102,13 +102,18 @@
         line-height: 1em;
         font-weight: 700;
     }
+
+    .btn-primary {
+        color: #9bdd65;
+        background-color: #9bdd65;
+    }
     .btn
     {
         position: relative;
         display: inline-block;
         padding: 10px 20px;
         text-decoration: none;
-        background: #9eccf1;;
+        background: #5EB319;
         color: white;
         font-size: 17px;
         font-weight: 550;
@@ -117,12 +122,15 @@
         margin: 10px 40px;
         
     }
+
+    
+
     .btn a{
         color:#fff;
     }
     .btn:hover{
-        background: #ffa801;
-        color: rgb(255, 249, 249);
+        background: #5EB319;
+        color: #fff;
     
     }
     .container .content .bannerText div p

@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { TokenService } from './token.service';
 import { AuthInterceptorServiceService } from './auth-interceptor-service.service';
 import { AuthResponse } from '../interfaces/auth-response';
+import Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class UsersService implements AuthResponse {
   public token: string 
   public myToken :any
   public access_token: string;
+  public errorMessage :string
 
   constructor(private _http: HttpClient,
               private router: Router,
@@ -28,6 +30,7 @@ export class UsersService implements AuthResponse {
     this.url = global.url;
     this.token = ""
     this.access_token = "";
+    this.errorMessage = "";
     
   }
 
@@ -55,9 +58,13 @@ export class UsersService implements AuthResponse {
         console.log("Institucion Guardada"); 
         this.router.navigate(['lider']);
       },
-      err => console.error(err)
-    );
+      (err)=> {
+        console.log(err)
+  });
   }
+
+
+
 
   Login(login: Login) {
     let params = JSON.stringify(login);
@@ -70,16 +77,34 @@ export class UsersService implements AuthResponse {
         this.router.navigate(['lider']);
         this.token = response.access_token
         console.log(this.token);
-        
-        this.GetToken()
-        
+        this.GetToken() 
+        Swal.fire({
+          icon: 'success',
+          title: 'Bienvenido a Big Edu',
+          showConfirmButton: false,
+          timer: 1200
+        });
       },
-      err => console.error(err)
-    );
+      err => {
+      console.error(err);
+      this.errorMessage = err
+      this.getErrorMessage();
+      Swal.fire({
+        title: 'Error!',
+        text: 'Usuario o Contraseña Invalidos',
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+        timer: 9500,
+      });
+      });
   }
 
   logged() {
     return this.token;
+  }
+
+  public getErrorMessage(): string {
+    return this.errorMessage;
   }
 
 
