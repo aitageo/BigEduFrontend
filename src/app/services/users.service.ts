@@ -21,6 +21,7 @@ export class UsersService implements AuthResponse {
   public myToken :any
   public access_token: string;
   public errorMessage :string
+  public institutionsList:any[]=[];
 
   constructor(private _http: HttpClient,
               private router: Router,
@@ -54,6 +55,7 @@ export class UsersService implements AuthResponse {
 
     this._http.post(this.url + '/institucion/nuevo', params, { headers: headers }).subscribe(
       response => {
+        this.GetIntitutions();
         console.log(response);
         console.log("Institucion Guardada"); 
         this.router.navigate(['lider']);
@@ -62,6 +64,26 @@ export class UsersService implements AuthResponse {
         console.log(err)
   });
   }
+
+
+
+  
+  GetIntitutions(){
+    const token = this.auth.getToken()
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+
+    this._http.get(this.url + '/institucion/todos',{headers:headers}).subscribe(
+      (response:any) => {
+         this.institutionsList = response.TodasInstituciones;
+         console.log(this.institutionsList[0]);
+      
+
+     }
+      
+      )}
 
 
 

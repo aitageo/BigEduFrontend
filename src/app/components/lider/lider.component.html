@@ -1,42 +1,4 @@
-<!doctype html>
-<html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-   <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap" rel="stylesheet">
-
-    <!-- Ionic icons -->
-    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
-    <title>Lider</title>
-</head>
-
-<body>
-    <div class="d-flex" id="content-wrapper">
-
-        <!-- Sidebar -->
-        <div id="sidebar-container" class="bg-primary">
-            <div class="logo">
-                <h4 class="text-light font-weight-bold mb-0 animate__bounce" (click)="destroyToken()" >Lider</h4>
-            </div>
-            <div class="menu">
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="text-light font-weight-bold mb-0" id="headingOne">
-                    <button class="accordion-button collapsed btn-primary text-light" style="border:color#5EB319, solid" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      <i class="icon ion-md-school">Instituciones educativas</i>&nbsp;
-                    </button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
-  Registrar  Nueva Intitucion Educativa
-</button>
-<div>
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -86,61 +48,79 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
                        </form>
-                  </div>
-              </div>
-          </div>
       </div>
+    </div>
   </div>
-      </div>
-          </div>
+</div>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap" rel="stylesheet">
+
+    <!-- Ionic icons -->
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+
+    <title>Dashboard - Templune</title>
+</head>
+
+<body>
+    <div class="d-flex" id="content-wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-container" class="bg-primary">
+          <div class="logo">
+            <h4 class="text-light font-weight-bold mb-0 animate__bounce" (click)="destroyToken()" >Lider</h4>
+        </div>
+            <div class="menu">
+              <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      <i class="icon ion-md-stats lead mr-2"></i> Programas
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      <i class="icon ion-md-school">Instituciones educativas</i>&nbsp;
                     </button>
                   </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse btn-primary " aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      Registrar Nuevo Programa
-                    </div>
+                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                  
+
+                      <!-- Button trigger modal -->
+                      <button type="button" class="btn btn-primary" style="display: block;width:100%" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Registrar Nueva Institucion
+                      </button>          
                   </div>
                 </div>
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed  btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      <i class="icon ion-md-person mr-2"></i>&nbsp;Instructor
+                  <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                      Accordion Item #2
                     </button>
                   </h2>
-                  <div id="collapseThree" class="accordion-collapse collapse  btn-primary" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      Registrar Nueva Programa
-                    </div>
-                  </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingFour">
-                      <button class="accordion-button collapsed  btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        <i class="icon ion-md-bookmarks"></i>&nbsp;Fichas
-                      </button>
-                    </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                      <div class="accordion-body">
-                        Registrar Nueva Ficha
-                      </div>
-                      </div>
+                  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
                   </div>
                 </div>
                 <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingFive">
-                    <button class="accordion-button collapsed  btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                      <i class="icon ion-md-filing"></i>&nbsp; Formatos
+                  <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="accordion-button collapsed btn-primary text-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                      Accordion Item #3
                     </button>
                   </h2>
-                  <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      Registrar Nuevo Formato
-                    </div>
-                    </div>
-              </div>
+                  <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+                  </div>
+                </div>
               </div>
             </div>
         </div>
@@ -172,83 +152,82 @@
               </div>
             </div>
           </nav>
-          <!-- Fin Navbar -->
+       <!-- Page Content -->
+       <div id="content" class="bg-grey w-100">
 
-        <!-- Page Content -->
-        <div id="content" class="bg-grey w-100">
-
-              <section class="bg-light py-3">
-                  <div class="container">
-                      <div class="row">
-                          <div class="col-lg-9 col-md-8">
-                            <h1 class="font-weight-bold mb-0">Bienvenido </h1>
-                            </div>
+        <section class="bg-light py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-8">
+                      <h1 class="font-weight-bold mb-0">Bienvenido </h1>
                       </div>
-                  </div>
-              </section>
-              <!---Todas las instituciones-->
-                <div class="container">
-              
-                  
                 </div>
-              <section>
-                <div class="container" style="width: 90%;margin-left:0%">
-                  <div class="row" style="display: flex;">
-                    <div class="col-lg-6 my-3">
-                      <div class="card rounded-0">
-                        <div class="card-header bg-light">
-                          <h6 class="font-weight-bold mb-0">GeoReferenciacion</h6>
-                        </div>
-                        <div class="card-body">
-                          <div id="map" style="height: 300px; width: 100%;"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-6 my-3">
-                      <div class="card rounded-0">
-                        <div class="card-header bg-light">
-                          <h6 class="font-weight-bold mb-0">Datos De Intituciones</h6>
-                        </div>
-                        <div class="card-body">
-                          <div>    
-                            <table>
-                              <thead>
-                                <tr>
-                                  <th>Nombre Institución</th>
-                                  <!-- <th>latitud</th> -->
-                                  <th>Telefono</th>
-                                  <th>Acciones</th>
-                                  <th></th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let institucion of institutionsList">
-                                  <td>{{ institucion.nombre_institucion }}</td>
-                                  <!-- <td>{{ institucion.ubicacion_geografica.lat }}</td> -->
-                                  <!-- <td>{{ institucion.ubicacion_geografica.lng }}</td> -->
-                                  <td>{{institucion.telefono_ie}}</td>
-                                  <td>
-                                    <div class="d-flex flex-row">
-                                      <button type="button" class="btn btn-primary mx-1 btn-sm">Editar</button>
-                                      <button type="button" class="btn btn-danger mx-1 btn-sm">Eliminar</button>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            
-                        </div>
-                        </div>
-                      </div>
-                    </div>
+            </div>
+        </section>
+        <!---Todas las instituciones-->
+          <div class="container">
+        
+            
+          </div>
+        <section>
+          <div class="container" style="width: 90%;margin-left:0%">
+            <div class="row" style="display: flex;">
+              <div class="col-lg-6 my-3">
+                <div class="card rounded-0">
+                  <div class="card-header bg-light">
+                    <h6 class="font-weight-bold mb-0">GeoReferenciacion</h6>
+                  </div>
+                  <div class="card-body">
+                    <div id="map" style="height: 300px; width: 100%;"></div>
                   </div>
                 </div>
-              </section>
-              
-        </div>
+              </div>
+              <div class="col-lg-6 my-3">
+                <div class="card rounded-0">
+                  <div class="card-header bg-light">
+                    <h6 class="font-weight-bold mb-0">Datos De Intituciones</h6>
+                  </div>
+                  <div class="card-body">
+                    <div>    
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Nombre Institución</th>
+                            <!-- <th>latitud</th> -->
+                            <th>Telefono</th>
+                            <th>Acciones</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let institucion of institutionsList;let i = index">
+                            <td>{{ institucion.nombre_institucion }}</td>
+                            <!-- <td>{{ institucion.ubicacion_geografica.lat }}</td>
+                            <td>{{ institucion.ubicacion_geografica.lng }}</td> -->
+                            <td>{{institucion.telefono_ie}}</td>
+                            <td>
+                              <div class="d-flex flex-row">
+                                <button type="button" class="btn btn-primary mx-1 btn-sm">Editar</button>
+                                <button type="button" class="btn btn-danger mx-1 btn-sm" name="institutionsList"
+                                  (click)="DeleteInstitucion(institucion._id,i)">Eliminar</button>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+  </div>
 
-        </div>
-    </div>
+  </div>
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -262,7 +241,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
-        
 </body>
 
 </html>

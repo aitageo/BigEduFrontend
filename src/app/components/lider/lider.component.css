@@ -21,6 +21,63 @@ a:hover {
   color: #5EB319;
 }
 
+.modal {
+  z-index: 1050 !important;
+}
+
+.modal-backdrop {
+  z-index: 1050 !important;
+}
+
+
+
+#sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #f8f9fa;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+/* Estilo para los enlaces del sidebar */
+#sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  display: block;
+}
+
+/* Estilo para los enlaces activos del sidebar */
+#sidebar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Estilo para los enlaces del acordeón */
+.accordion-link {
+  cursor: pointer;
+}
+
+/* Estilo para el contenido del acordeón */
+.accordion-content {
+  display: none;
+  padding: 10px;
+  margin-left: 20px;
+  border-left: 1px solid #ccc;
+}
+
+/* Estilo para el título del modal */
+.modal-title {
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .bg-primary { background-color: var( --green) !important; }
 
 .bg-light { background-color: var(--light) !important; }
@@ -45,7 +102,7 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+}/* esta ya   */
 
 .btn-success {
   margin-right: 10px;
@@ -54,6 +111,7 @@ a:hover {
 .btn-danger {
   margin-right: 10px;
 }
+
 .btn {
   margin: auto;
   outline: none;

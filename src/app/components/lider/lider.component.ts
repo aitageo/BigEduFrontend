@@ -9,10 +9,10 @@ import * as L from 'leaflet';
 
 import { Institucion } from 'src/app/models/institucion';
 
-import { marker } from 'leaflet';
+// import { marker } from 'leaflet';
 import { MapaService } from 'src/app/services/mapa.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { debounceTime } from 'rxjs';
+
 
 @Component({
   selector: 'app-lider',
@@ -95,7 +95,8 @@ export class LiderComponent implements OnInit{
 
   saveInstitution(form:any){
     console.log(this.Institucion);
-    this._userService.saveInstitution(this.Institucion)//llama el servicio userService para llamar el endPoint del backend
+    this._userService.saveInstitution(this.Institucion);
+    this.userservice.GetIntitutions();
     Swal.fire({
       icon: 'success',
       title: 'Registro Guardado',
@@ -104,15 +105,19 @@ export class LiderComponent implements OnInit{
     // Obtener las coordenadas del marcador
     const lat = this.Institucion.lat;
     const lng = this.Institucion.lng;
-    
+  
     // Mover el marcador a las nuevas coordenadas
     this.marker.setLatLng([parseFloat(lat.toString()), parseFloat(lng.toString())]);
-    
+  
     // Centrar el mapa en las nuevas coordenadas del marcador
     this.map.setView([parseFloat(lat.toString()), parseFloat(lng.toString())], 15);
-    
+  
     form.reset();
+    this.GetIntitutions();
+    
+   
   }
+  
 
 
   GetIntitutions(){
@@ -125,14 +130,56 @@ export class LiderComponent implements OnInit{
     this._http.get(this.url + '/institucion/todos',{headers:headers}).subscribe(
       (response:any) => {
          this.institutionsList = response.TodasInstituciones;
-         console.log(this.institutionsList);
-         
-        const instituciones: Intitucions[] = [];
+         console.log(this.institutionsList[0]);
       
 
      }
       
       )}
+
+// ...
+      
+DeleteInstitucion(id: number,index:number) {
+        const token = this.auth.getToken();
+        let headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        });
+      
+        // Show a confirmation dialog using SweetAlert
+        Swal.fire({
+          title: '¿Estás seguro?',
+          text: 'Esta acción no se puede deshacer',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Sí, borrar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // If the user confirms the action, send a DELETE request
+            this._http.delete(this.url + '/institucion/borrar/' + id, { headers: headers }).subscribe(
+              (response: any) => {
+                this.institutionsList.splice(index,1)
+                console.log(this.institutionsList);
+                // Show a success message using SweetAlert
+                Swal.fire({
+                  title: 'Institución eliminada',
+                  icon: 'success'
+                });
+              },
+              (error: any) => {
+                // Show an error message using SweetAlert
+                Swal.fire({
+                  title: 'Error al eliminar la institución',
+                  text: error.message,
+                  icon: 'error'
+                });
+              }
+            );
+          }
+        });
+      }
+        
 
   destroyToken(){
     Swal.fire({
