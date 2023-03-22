@@ -3,6 +3,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { AuthInterceptorServiceService } from 'src/app/services/auth-interceptor-service.service';
 import { HttpClient, HttpHeaders, HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
 import { Intitucions } from 'src/app/interfaces/intitucions';
+import { global } from 'src/app/services/global';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import * as L from 'leaflet';
@@ -20,7 +21,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./lider.component.css']
 })
 export class LiderComponent implements OnInit{
-  [x: string]: any;
   public token:string
   public longitud : number
   public latitud : number
@@ -30,9 +30,15 @@ export class LiderComponent implements OnInit{
   public nombre;
   public institutionsList:any[]=[];
   public url:string
-  public markersList:[]=[];
+  public markersList:any[]=[];
   public todasInstituciones:any
   public form: FormGroup; 
+  public Deparments:any[]=[]
+  public Cities: any[]=[]
+  public selectedDepartments: string="";
+  public selectedCities: string="";
+  public data:any[]=[] 
+
   
 
   constructor(
@@ -42,7 +48,8 @@ export class LiderComponent implements OnInit{
     private auth:  AuthInterceptorServiceService,
     private _http: HttpClient,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    
 
   ) { 
     this.token = "";
@@ -50,7 +57,7 @@ export class LiderComponent implements OnInit{
     this.latitud = 0
     this.Institucion = new Institucion("","","","",0,0);
     this.nombre = "",
-    this.url = "http://localhost:3100/api";
+    this.url = global.url;
 
     this.form = this.formBuilder.group({
        Nombre_Institucion:['',Validators.required],
@@ -59,6 +66,8 @@ export class LiderComponent implements OnInit{
        Telefono: ['',Validators.required],
        Latitud: ['',Validators.required],
        Longitud: ['',Validators.required],
+       selectedDepartments: ['',Validators.required],
+       selectedCities:['',Validators.required],
       
     });
     
@@ -66,11 +75,48 @@ export class LiderComponent implements OnInit{
   }
 
 
-
   ngOnInit(): void {
-    this.initMap();
     this.GetIntitutions();
+    this.initMap();
+    //Api Socrata
+    this._http.get<any[]>("https://www.datos.gov.co/resource/xdk5-pm3f.json").subscribe(data => {
+      console.log(data);
+      this.data = data;
+
+      const NoEqualsDepartments:any = {};
+
+      this.data.forEach(item => {
+        NoEqualsDepartments[item.departamento] = true;
+      });
+      
+      // this.Deparments = data.map(item => item.departamento);
+      // console.log(this.Deparments);
+      this.Deparments = Object.keys(NoEqualsDepartments);
+      
+      this.Cities = data.map(item => item.municipio);
+      console.log(this.Cities);
+
+     
+      
+    });
   }
+
+
+onDepartamentoChange(event: any) {
+  const selectedDepartment = event.target.value;
+  this.Cities = this.data.filter(item => item.departamento === selectedDepartment)
+  .map(item => item.municipio);
+}
+
+
+
+onMunicipioChange(event: any) {
+  this.selectedCities = event.target.value;
+}
+
+
+//FIN Api Socrata
+
 
   private initMap() {
     this.map = L.map('map').setView([6.2486069, -75.5742467], 12);
@@ -93,9 +139,11 @@ export class LiderComponent implements OnInit{
     // this.markersList.push({lat,lng,this.nombre})
   }
 
+  //guarda una institucion obteniendo los datos del modal validados con formularios reactivos
+
   saveInstitution(form:any){
     console.log(this.Institucion);
-    this._userService.saveInstitution(this.Institucion);
+    this._userService.saveInstitution(form.value);
     this.userservice.GetIntitutions();
     Swal.fire({
       icon: 'success',
@@ -119,26 +167,37 @@ export class LiderComponent implements OnInit{
   }
   
 
+//obtiene todas las intituciones
+GetIntitutions(){
+  const token = this.userservice.GetToken()
+  console.log(token);
+  
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`
+  });
 
-  GetIntitutions(){
-    const token = this.auth.getToken()
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    });
+  this._http.get(this.url + '/institucion/todos',{headers:headers}).subscribe(
+    (response:any) => {
+       this.institutionsList = response.TodasInstituciones;
+       console.log(this.institutionsList[0]);
+    
 
-    this._http.get(this.url + '/institucion/todos',{headers:headers}).subscribe(
-      (response:any) => {
-         this.institutionsList = response.TodasInstituciones;
-         console.log(this.institutionsList[0]);
-      
+   }
+    
+    )}
 
-     }
-      
-      )}
+  //Obtener una sola institucion
 
-// ...
-      
+  // GetInstitution(id:number){
+  //   this._userService.GetInstitution(id);
+  //   this.userservice.GetIntitutions();
+
+  // }
+
+
+
+//borra la institucion pasandole como parametro el id      
 DeleteInstitucion(id: number,index:number) {
         const token = this.auth.getToken();
         let headers = new HttpHeaders({
@@ -146,29 +205,30 @@ DeleteInstitucion(id: number,index:number) {
           Authorization: `Bearer ${token}`
         });
       
-        // Show a confirmation dialog using SweetAlert
+        
+        //Muestra el mensaje de confirmacion de  SweetAlert
         Swal.fire({
           title: '¿Estás seguro?',
           text: 'Esta acción no se puede deshacer',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonText: 'Sí, borrar',
-          cancelButtonText: 'Cancelar'
+          cancelButtonText: 'Cancelar',
         }).then((result) => {
           if (result.isConfirmed) {
-            // If the user confirms the action, send a DELETE request
+            //Si el usuario confirma la accion , envia el Delete request
             this._http.delete(this.url + '/institucion/borrar/' + id, { headers: headers }).subscribe(
               (response: any) => {
                 this.institutionsList.splice(index,1)
                 console.log(this.institutionsList);
-                // Show a success message using SweetAlert
+                //Muestra un mensage usando SweetAlert
                 Swal.fire({
                   title: 'Institución eliminada',
                   icon: 'success'
                 });
               },
               (error: any) => {
-                // Show an error message using SweetAlert
+                  //Muestra un mensage de error usando SweetAlert
                 Swal.fire({
                   title: 'Error al eliminar la institución',
                   text: error.message,
@@ -179,7 +239,12 @@ DeleteInstitucion(id: number,index:number) {
           }
         });
       }
+
+
+
         
+//Fin crud
+
 
   destroyToken(){
     Swal.fire({

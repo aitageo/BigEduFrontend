@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.message = false;
       this.router.navigate(['lider']);
-      form.reset()
+      // form.reset()
     
     }
   }

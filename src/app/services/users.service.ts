@@ -17,7 +17,7 @@ import Swal from 'sweetalert2'
 })
 export class UsersService implements AuthResponse {
   public url: string;
-  public token: string 
+  public token: any 
   public myToken :any
   public access_token: string;
   public errorMessage :string
@@ -42,7 +42,7 @@ export class UsersService implements AuthResponse {
   }
 
   saveInstitution(institucion: Institucion) {
-    const token = this.auth.getToken()
+    const token = this.GetToken()
     console.log(token);
     console.log(this.GetToken());
     
@@ -70,12 +70,14 @@ export class UsersService implements AuthResponse {
   
   GetIntitutions(){
     const token = this.auth.getToken()
+    console.log(token);
+    
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     });
 
-    this._http.get(this.url + '/institucion/todos',{headers:headers}).subscribe(
+    this._http.get(`${this.url}/institucion/todos`,{headers:headers}).subscribe(
       (response:any) => {
          this.institutionsList = response.TodasInstituciones;
          console.log(this.institutionsList[0]);
@@ -86,25 +88,39 @@ export class UsersService implements AuthResponse {
       )}
 
 
+  // GetInstitution(id:number){
+  //   const token = this.auth.getToken()
+  //   let headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     Authorization: `Bearer ${token}`
+  //   });
+
+  //   this._http.get(this.url + 'institucion/buscar/' + id,{headers:headers}).subscribe(
+      
+  //   )
+  // }    
+
 
 
   Login(login: Login) {
     let params = JSON.stringify(login);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    this._http.post<AuthResponse>(this.url + '/usuario/login/', params, { headers: headers }).subscribe(
+    this._http.post(this.url + '/usuario/login/', params, { headers: headers }).subscribe(
       response => {
         console.log(JSON.stringify(response));
+        console.log(response)
         console.log("Usuario Logueado"); 
         this.router.navigate(['lider']);
-        this.token = response.access_token
+        this.token = response
+        // this.token = this.auth.getToken();
         console.log(this.token);
         this.GetToken() 
         Swal.fire({
           icon: 'success',
           title: 'Bienvenido a Big Edu',
           showConfirmButton: false,
-          timer: 1200
+          timer: 800
         });
       },
       err => {
@@ -122,7 +138,7 @@ export class UsersService implements AuthResponse {
   }
 
   logged() {
-    return this.token;
+    return this.auth.getToken();
   }
 
   public getErrorMessage(): string {

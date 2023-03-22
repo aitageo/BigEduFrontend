@@ -1,6 +1,6 @@
 
 
-<!-- Modal -->
+<!-- Modal  SaveIntitucion-->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -42,16 +42,59 @@
           <div class="form-outline mb-4">
             <input type="number" id="form6Example6" class="form-control" placeholder="Longitud" name="Longitud" [(ngModel)]="Institucion.lng" [(ngModel)]="longitud" formControlName="Longitud" />
           </div>
+          <div class="form-outline mb-4">
+            <label>Departamento:</label>
+            <select formControlName="selectedDepartments" (change)="onDepartamentoChange($event)">
+                <option *ngFor="let dep of Deparments">{{ dep }}</option>
+            </select>
+        </div>
+        <div>
+            <label>Municipio:</label>
+            <select formControlName="selectedCities" (change)="onMunicipioChange($event)" style="min-width: 160px;">
+                <option *ngFor="let mun of Cities">{{ mun}}</option>
+            </select>
+        </div>        
           <div class="text-center btn-toolbar">
           <!-- Submit button --  btn-block mb-4 para que se vea en bloque----->
           <button type="submit" class="btn btn-success" name="guardar"  [disabled]="!form.valid">Guardar</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
-                       </form>
+      </form>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Fin Modal saveIntitucion -->
+
+
+<!-- Modal EditarInstitucion -->
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Fin Modal  EditarInstitucion-->
 
 <!doctype html>
 <html lang="en">
@@ -65,7 +108,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"  />
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap" rel="stylesheet">
@@ -73,7 +116,7 @@
     <!-- Ionic icons -->
     <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 
-    <title>Dashboard - Templune</title>
+ 
 </head>
 
 <body>
@@ -82,7 +125,7 @@
         <!-- Sidebar -->
         <div id="sidebar-container" class="bg-primary">
           <div class="logo">
-            <h4 class="text-light font-weight-bold mb-0 animate__bounce" (click)="destroyToken()" >Lider</h4>
+            <h4 class="text-light animate__animated animate__bounce animate__bounce" (click)="destroyToken()" style="text-align: center;margin-top:5px">Lider</h4>
         </div>
             <div class="menu">
               <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -108,7 +151,8 @@
                     </button>
                   </h2>
                   <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                    <div class="accordion-body">
+                    </div>
                   </div>
                 </div>
                 <div class="accordion-item">
@@ -147,6 +191,7 @@
                     <a class="nav-link text-dark dropdown-toggle" id="navbarDropdown" role="button"
                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="destroyToken()">
                       <img src="../assets/img/new_logo.png" class="img-fluid rounded-circle avatar mr-2"/>logout</a>
+                      <a href="" src="../assets/img/new_logo.png"  ></a>
                   </li>
                 </ul>
               </div>
@@ -159,7 +204,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-9 col-md-8">
-                      <h1 class="font-weight-bold mb-0">Bienvenido </h1>
+                      <h1 class="animate__animated animate__bounceInDown">Bienvenido </h1>
                       </div>
                 </div>
             </div>
@@ -207,7 +252,9 @@
                             <td>{{institucion.telefono_ie}}</td>
                             <td>
                               <div class="d-flex flex-row">
-                                <button type="button" class="btn btn-primary mx-1 btn-sm">Editar</button>
+                                <button type="button" class="btn btn-primary mx-1 btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                                  Editar
+                                </button>
                                 <button type="button" class="btn btn-danger mx-1 btn-sm" name="institutionsList"
                                   (click)="DeleteInstitucion(institucion._id,i)">Eliminar</button>
                               </div>

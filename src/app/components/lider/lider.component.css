@@ -29,6 +29,10 @@ a:hover {
   z-index: 1050 !important;
 }
 
+.animate__animated {
+  animation-iteration-count: 3;
+}
+
 
 
 #sidebar {
