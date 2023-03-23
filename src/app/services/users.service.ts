@@ -41,53 +41,6 @@ export class UsersService implements AuthResponse {
     return this._http.post(this.url + '/usuario/nuevo', params, { headers: headers });
   }
 
-  saveInstitution(institucion: Institucion) {
-    const token = this.GetToken()
-    console.log(token);
-    console.log(this.GetToken());
-    
-    
-    let params = JSON.stringify(institucion);
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    });
-
-    this._http.post(this.url + '/institucion/nuevo', params, { headers: headers }).subscribe(
-      response => {
-        this.GetIntitutions();
-        console.log(response);
-        console.log("Institucion Guardada"); 
-        this.router.navigate(['lider']);
-      },
-      (err)=> {
-        console.log(err)
-  });
-  }
-
-
-
-  
-  GetIntitutions(){
-    const token = this.auth.getToken()
-    console.log(token);
-    
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    });
-
-    this._http.get(`${this.url}/institucion/todos`,{headers:headers}).subscribe(
-      (response:any) => {
-         this.institutionsList = response.TodasInstituciones;
-         console.log(this.institutionsList[0]);
-      
-
-     }
-      
-      )}
-
-
   // GetInstitution(id:number){
   //   const token = this.auth.getToken()
   //   let headers = new HttpHeaders({
@@ -106,15 +59,14 @@ export class UsersService implements AuthResponse {
     let params = JSON.stringify(login);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    this._http.post(this.url + '/usuario/login/', params, { headers: headers }).subscribe(
+    this._http.post<any>(this.url + '/usuario/login/', params, { headers: headers }).subscribe(
       response => {
-        console.log(JSON.stringify(response));
         console.log(response)
         console.log("Usuario Logueado"); 
         this.router.navigate(['lider']);
-        this.token = response
-        // this.token = this.auth.getToken();
-        console.log(this.token);
+        // this.token = (JSON.stringify(response));
+        this.token = response.token
+        console.log(`Èste es el token? ${this.token}`);
         this.GetToken() 
         Swal.fire({
           icon: 'success',
@@ -137,8 +89,53 @@ export class UsersService implements AuthResponse {
       });
   }
 
+
+  saveInstitution(institucion: Institucion) {
+    const token = this.auth.getToken()
+    console.log(token);
+    this.GetIntitutions()
+    let params = JSON.stringify(institucion);
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+    console.log(headers);
+    
+
+    this._http.post(this.url + '/institucion/nuevo', params, { headers: headers }).subscribe(
+      response => {
+        this.GetIntitutions();
+        console.log(response);
+        console.log("Institucion Guardada"); 
+        this.router.navigate(['lider']);
+      },
+      (err)=> {
+        console.log(err)
+  });
+  } 
+
+
+  GetIntitutions(){
+    const token = this.auth.getToken()
+    console.log(token);
+    
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+
+    this._http.get(`${this.url}/institucion/todos`,{headers:headers}).subscribe(
+      (response:any) => {
+         this.institutionsList = response.TodasInstituciones;
+         console.log(this.institutionsList[0]);
+      
+
+     }
+      
+      )}
+
   logged() {
-    return this.auth.getToken();
+    return this.token
   }
 
   public getErrorMessage(): string {
@@ -148,9 +145,6 @@ export class UsersService implements AuthResponse {
 
   GetToken(){
    this.myToken = this.token
- 
-   console.log(this.myToken);
-   
    this.cookieService.set("token",this.myToken)
    return this.cookieService.get("token")
   }

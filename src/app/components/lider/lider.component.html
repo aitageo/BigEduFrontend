@@ -1,7 +1,8 @@
 
 
 <!-- Modal  SaveIntitucion-->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,57 +10,68 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form  #RegisInsti="ngForm" (ngSubmit)="saveInstitution(RegisInsti)" [formGroup]="form">
+        <form #RegisInsti="ngForm" (ngSubmit)="saveInstitution(RegisInsti)" [formGroup]="form">
           <div class="row mb-4">
             <div class="col">
               <div class="form-outline">
-                <input type="text" id="form6Example1" class="form-control" placeholder="Nombre Institucion" name="Nombre Institucion" [(ngModel)]="Institucion.nombre_institucion" [(ngModel)]="nombre" formControlName="Nombre_Institucion"/>
+                <input type="text" id="form6Example1" class="form-control" placeholder="Nombre Institucion"
+                  name="Nombre Institucion" [(ngModel)]="Institucion.nombre_institucion" [(ngModel)]="nombre"
+                  formControlName="Nombre_Institucion" />
               </div>
             </div>
           </div>
           <!-- Text input -->
           <div class="form-outline mb-4">
-            <input type="text" id="form6Example3" class="form-control" placeholder="Nombre Coordinador" name="Nombre Coordinador" [(ngModel)]="Institucion.nombre_coordinador" formControlName="Nombre_Coordinador" />
+            <input type="text" id="form6Example4" class="form-control" placeholder="Nombre Rector" name="Nombre Rector"
+              [(ngModel)]="Institucion.nombre_rector" formControlName="Nombre_Rector" />
           </div>
-        
+
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono Rector "
+              name="Telefono Rector" [(ngModel)]="Institucion.telefono_rector" 
+              formControlName="Telefono_Rector" />
+          </div>
           <!-- Text input -->
           <div class="form-outline mb-4">
-            <input type="text" id="form6Example4" class="form-control" placeholder="Nombre Rector" name="Nombre Rector" [(ngModel)]="Institucion.nombre_rector" formControlName="Nombre_Rector" />
-          </div>
-        
-          <!-- Email input -->
-          <!-- <div class="form-outline mb-4">
-            <input type="email" id="form6Example5" class="form-control" placeholder="Email"/>
-          </div> -->
-        
-          <!-- Number input -->
-          <div class="form-outline mb-4">
-            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono" name="Telefono" [(ngModel)]="Institucion.telefono_ie"  formControlName="Telefono"/>
+            <input type="text" id="form6Example3" class="form-control" placeholder="Nombre Coordinador"
+              name="Nombre Coordinador" [(ngModel)]="Institucion.nombre_coordinador"
+              formControlName="Nombre_Coordinador" />
           </div>
           <div class="form-outline mb-4">
-            <input type="number" id="form6Example6" class="form-control" placeholder="Latitud" name="Latitud" [(ngModel)]="Institucion.lat" [(ngModel)]="latitud" formControlName="Latitud" />
+            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono Coordinador"
+              name="Telefono Coordinador" [(ngModel)]="Institucion.telefono_coordinador"
+              formControlName="Telefono_Coordinador" />
           </div>
           <div class="form-outline mb-4">
-            <input type="number" id="form6Example6" class="form-control" placeholder="Longitud" name="Longitud" [(ngModel)]="Institucion.lng" [(ngModel)]="longitud" formControlName="Longitud" />
+            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono Institucion"
+              name="Telefono" [(ngModel)]="Institucion.telefono_ie" formControlName="Telefono" />
+          </div>
+          <div class="form-outline mb-4">
+            <input type="number" id="form6Example6" class="form-control" placeholder="Latitud" name="Latitud"
+              [(ngModel)]="Institucion.lat" [(ngModel)]="latitud" formControlName="Latitud" />
+          </div>
+          <div class="form-outline mb-4">
+            <input type="number" id="form6Example6" class="form-control" placeholder="Longitud" name="Longitud"
+              [(ngModel)]="Institucion.lng" [(ngModel)]="longitud" formControlName="Longitud" />
           </div>
           <div class="form-outline mb-4">
             <label>Departamento:</label>
-            <select formControlName="selectedDepartments" (change)="onDepartamentoChange($event)">
-                <option *ngFor="let dep of Deparments">{{ dep }}</option>
+            <select formControlName="selectedDepartments" (change)="onDepartamentoChange($event)" [(ngModel)]="Institucion.departamento">
+              <option *ngFor="let dep of Deparments">{{ dep }}</option>
             </select>
-        </div>
-        <div>
-            <label>Municipio:</label>
-            <select formControlName="selectedCities" (change)="onMunicipioChange($event)" style="min-width: 160px;">
-                <option *ngFor="let mun of Cities">{{ mun}}</option>
-            </select>
-        </div>        
-          <div class="text-center btn-toolbar">
-          <!-- Submit button --  btn-block mb-4 para que se vea en bloque----->
-          <button type="submit" class="btn btn-success" name="guardar"  [disabled]="!form.valid">Guardar</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
-      </form>
+          <div>
+            <label>Municipio:</label>
+            <select formControlName="selectedCities" (change)="onMunicipioChange($event)" style="min-width: 160px;" [(ngModel)]="Institucion.municipio">
+              <option *ngFor="let mun of Cities">{{ mun}}</option>
+            </select>
+          </div>
+          <div class="text-center btn-toolbar">
+            <!-- Submit button --  btn-block mb-4 para que se vea en bloque----->
+            <button type="submit" class="btn btn-success" name="guardar" [disabled]="!form.valid">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

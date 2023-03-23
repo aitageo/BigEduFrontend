@@ -55,14 +55,16 @@ export class LiderComponent implements OnInit{
     this.token = "";
     this.longitud = 0
     this.latitud = 0
-    this.Institucion = new Institucion("","","","",0,0);
+    this.Institucion = new Institucion("","","","",0,0,"","","","");
     this.nombre = "",
     this.url = global.url;
 
     this.form = this.formBuilder.group({
        Nombre_Institucion:['',Validators.required],
-       Nombre_Coordinador:['',Validators.required],
        Nombre_Rector:['',Validators.required],
+       Telefono_Rector:['',Validators.required],
+       Nombre_Coordinador:['',Validators.required],
+       Telefono_Coordinador:['',Validators.required],
        Telefono: ['',Validators.required],
        Latitud: ['',Validators.required],
        Longitud: ['',Validators.required],
@@ -71,8 +73,10 @@ export class LiderComponent implements OnInit{
       
     });
     
-
+const formdata = this.form.getRawValue()
   }
+
+
 
 
   ngOnInit(): void {
@@ -142,9 +146,11 @@ onMunicipioChange(event: any) {
   //guarda una institucion obteniendo los datos del modal validados con formularios reactivos
 
   saveInstitution(form:any){
+    // const formdata = this.form.getRawValue();
     console.log(this.Institucion);
-    this._userService.saveInstitution(form.value);
+    this._userService.saveInstitution(this.Institucion);
     this.userservice.GetIntitutions();
+    this.GetIntitutions()
     Swal.fire({
       icon: 'success',
       title: 'Registro Guardado',
@@ -169,7 +175,7 @@ onMunicipioChange(event: any) {
 
 //obtiene todas las intituciones
 GetIntitutions(){
-  const token = this.userservice.GetToken()
+  const token = this.auth.getToken()
   console.log(token);
   
   let headers = new HttpHeaders({

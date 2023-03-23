@@ -6,6 +6,10 @@ export class Institucion {
         public telefono_ie:String,
         public lat:Number,
         public lng:Number,
+        public telefono_rector: String,
+        public telefono_coordinador:String,
+        public departamento:String,
+        public municipio:String,
     ){
 
     }
