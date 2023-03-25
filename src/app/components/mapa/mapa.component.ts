@@ -27,7 +27,8 @@ export class MapaComponent implements OnInit {
         })
       }).addTo(map);
 
-      marker.bindPopup(`Institución Educativa Presbítero Bernardo Montoya Giraldo`);
+      marker.bindPopup(`Institución Educativa Presbítero Bernardo Montoya Giraldo,
+                        Rector: Jose Luiz Cifuentes`);
       marker.on('mouseover',(e)=> {
         marker.openPopup();
       })

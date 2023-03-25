@@ -82,24 +82,76 @@
 
 <!-- Modal EditarInstitucion -->
 
-
-<!-- Button trigger modal -->
-
-
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar Institucion</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" >
+        <form >
+          <div class="row mb-4"  >
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example1" class="form-control" placeholder="Nombre Institucion"
+                  name="nombre_institucion" [(ngModel)]="nombre_institucion" />
+              </div>
+            </div>
+          </div>
+          <!-- Text input -->
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example4" class="form-control" placeholder="Nombre Rector" name="nombre_rector" 
+            [(ngModel)]="nombre_rector"/>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono Rector "
+              name="Telefono Rector"  [(ngModel)]="telefono_rector"  />
+          </div>
+          <!-- Text input -->
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example3" class="form-control" placeholder="Nombre Coordinador"
+              name="Nombre Coordinador"  [(ngModel)]="nombre_coordinador"/>
+          </div>
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono Coordinador"
+              name="Telefono Coordinador"/>
+          </div>
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono Institucion"/>
+          </div>
+          <div class="form-outline mb-4">
+            <input type="number" id="form6Example6" class="form-control" placeholder="Latitud" name="Latitud"
+              />
+          </div>
+          <div class="form-outline mb-4">
+            <input type="number" id="form6Example6" class="form-control" placeholder="Longitud" name="Longitud"
+             />
+          </div>
+          <div class="form-outline mb-4">
+            <label>Departamento:</label>
+            <select (change)="onDepartamentoChange($event)" [(ngModel)]="Institucion.departamento">
+              <option *ngFor="let dep of Deparments">{{ dep }}</option>
+            </select>
+          </div>
+          <div>
+            <label>Municipio:</label>
+            <select (change)="onMunicipioChange($event)" style="min-width: 160px;" [(ngModel)]="Institucion.municipio">
+              <option *ngFor="let mun of Cities">{{ mun}}</option>
+            </select>
+          </div>
+          <div class="text-center btn-toolbar">
+            <!-- Submit button --  btn-block mb-4 para que se vea en bloque----->
+            <button type="submit" class="btn btn-success" name="guardar" [disabled]="!form.valid">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-primary">Actualizar</button>
       </div>
     </div>
   </div>
@@ -264,7 +316,10 @@
                             <td>{{institucion.telefono_ie}}</td>
                             <td>
                               <div class="d-flex flex-row">
-                                <button type="button" class="btn btn-primary mx-1 btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                                <button type="button" 
+                                class="btn btn-primary mx-1 btn-sm" 
+                                data-bs-toggle="modal" data-bs-target="#staticBackdrop1"
+                                 (click)="GetInstitution(institucion._id)">
                                   Editar
                                 </button>
                                 <button type="button" class="btn btn-danger mx-1 btn-sm" name="institutionsList"

@@ -22,6 +22,7 @@ export class UsersService implements AuthResponse {
   public access_token: string;
   public errorMessage :string
   public institutionsList:any[]=[];
+  public InstitutionFound:any[]=[]
 
   constructor(private _http: HttpClient,
               private router: Router,
@@ -41,21 +42,7 @@ export class UsersService implements AuthResponse {
     return this._http.post(this.url + '/usuario/nuevo', params, { headers: headers });
   }
 
-  // GetInstitution(id:number){
-  //   const token = this.auth.getToken()
-  //   let headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Bearer ${token}`
-  //   });
-
-  //   this._http.get(this.url + 'institucion/buscar/' + id,{headers:headers}).subscribe(
-      
-  //   )
-  // }    
-
-
-
-  Login(login: Login) {
+       Login(login: Login) {
     let params = JSON.stringify(login);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -132,7 +119,18 @@ export class UsersService implements AuthResponse {
 
      }
       
-      )}
+  )}
+
+
+  GetInstitution(id:number){
+    const token = this.auth.getToken()
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+
+     return this._http.get<any>(this.url + '/institucion/buscar/' + id,{headers:headers})
+  } 
 
   logged() {
     return this.token

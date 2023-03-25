@@ -37,7 +37,12 @@ export class LiderComponent implements OnInit{
   public Cities: any[]=[]
   public selectedDepartments: string="";
   public selectedCities: string="";
-  public data:any[]=[] 
+  public data:any[]=[];
+  public InstitutionFound:any[]=[]
+  public nombre_institucion:string="";
+  public nombre_rector:string="";
+  public telefono_rector:string="";
+  public nombre_coordinador:string="";
 
   
 
@@ -195,11 +200,22 @@ GetIntitutions(){
 
   //Obtener una sola institucion
 
-  // GetInstitution(id:number){
-  //   this._userService.GetInstitution(id);
-  //   this.userservice.GetIntitutions();
-
-  // }
+  GetInstitution(id:number){
+    this._userService.GetInstitution(id).subscribe(
+      (response:any) => {
+        this.nombre_institucion = response.InstitucionFound.nombre_institucion;
+        this.nombre_rector = response.InstitucionFound.nombre_rector;
+        this.nombre_coordinador = response.InstitucionFound.nombre_coordinador;
+        this.telefono_rector = response.InstitucionFound.telefonos_ie.telefono_rector;
+        this.userservice.GetIntitutions();
+        
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+  
 
 
 
