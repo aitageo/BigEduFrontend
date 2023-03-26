@@ -43,6 +43,10 @@ export class LiderComponent implements OnInit{
   public nombre_rector:string="";
   public telefono_rector:string="";
   public nombre_coordinador:string="";
+  public telefono_coordinador:string="";
+  public telefono_institucion:string="";
+  public selectedId:number=0;
+  
 
   
 
@@ -112,8 +116,8 @@ const formdata = this.form.getRawValue()
 
 
 onDepartamentoChange(event: any) {
-  const selectedDepartment = event.target.value;
-  this.Cities = this.data.filter(item => item.departamento === selectedDepartment)
+  this.selectedDepartments = event.target.value;
+  this.Cities = this.data.filter(item => item.departamento === this.selectedDepartments)
   .map(item => item.municipio);
 }
 
@@ -201,12 +205,18 @@ GetIntitutions(){
   //Obtener una sola institucion
 
   GetInstitution(id:number){
+    this.selectedId = id;
     this._userService.GetInstitution(id).subscribe(
       (response:any) => {
         this.nombre_institucion = response.InstitucionFound.nombre_institucion;
         this.nombre_rector = response.InstitucionFound.nombre_rector;
-        this.nombre_coordinador = response.InstitucionFound.nombre_coordinador;
         this.telefono_rector = response.InstitucionFound.telefonos_ie.telefono_rector;
+        this.nombre_coordinador = response.InstitucionFound.nombre_coordinador;
+        this.telefono_coordinador = response.InstitucionFound.telefonos_ie.telefono_coordinador;
+        this.telefono_institucion = response.InstitucionFound.telefonos_ie.telefono_ie;
+        this.latitud = response.InstitucionFound.ubicacion_geografica.lat;
+        this.longitud = response.InstitucionFound.ubicacion_geografica.lng;
+        
         this.userservice.GetIntitutions();
         
       },
@@ -214,6 +224,44 @@ GetIntitutions(){
         console.error(err);
       }
     );
+  }
+
+  UpdateInstitucion(id:number,form:any){//usando rxjs con observables
+    const data = {
+      nombre_institucion: this.nombre_institucion,
+      nombre_rector: this.nombre_rector,
+      telefono_rector: this.telefono_rector,
+      nombre_coordinador: this.nombre_coordinador,
+      telefono_coordinador: this.telefono_coordinador,
+      telefono_institucion: this.telefono_institucion,
+      latitud: this.latitud,
+      longitud: this.longitud,
+      departamento: this.Institucion.departamento,
+      municipio: this.Institucion.municipio
+    };
+    this.userservice.UpdateInstitucion(id,data).subscribe(
+      {
+        next:(response:any)=>{
+            console.log(response);
+            Swal.fire({
+              icon: 'success',
+              title: 'Actualización exitosa',
+              text: 'La institución ha sido actualizada correctamente'
+            });
+            this.GetIntitutions();
+            form.reset()
+                
+        },
+        error:err=>{
+          console.error(err);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Ha ocurrido un error al procesar la solicitud."
+          });
+        }
+      }
+    )
   }
   
 

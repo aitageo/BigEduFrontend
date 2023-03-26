@@ -132,6 +132,24 @@ export class UsersService implements AuthResponse {
      return this._http.get<any>(this.url + '/institucion/buscar/' + id,{headers:headers})
   } 
 
+
+  UpdateInstitucion(id:number,data:any):Observable<any>{
+    const token = this.auth.getToken()
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });///institucion/actualizar/:id'
+
+    return this._http.put<any>(`${this.url}/institucion/actualizar/${id}`,data,{headers:headers})
+
+  }
+
+
+
+
+
+
+
   logged() {
     return this.token
   }
