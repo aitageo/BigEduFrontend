@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { AuthInterceptorServiceService } from 'src/app/services/auth-interceptor-service.service';
 import { HttpClient, HttpHeaders, HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
-import { Intitucions } from 'src/app/interfaces/intitucions';
+import { Institucion } from 'src/app/models/institucion';
 import { global } from 'src/app/services/global';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'
 import * as L from 'leaflet';
 
-import { Institucion } from 'src/app/models/institucion';
+
 
 // import { marker } from 'leaflet';
 import { MapaService } from 'src/app/services/mapa.service';
@@ -20,69 +20,72 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   templateUrl: './lider.component.html',
   styleUrls: ['./lider.component.css']
 })
-export class LiderComponent implements OnInit{
-  public token:string
-  public longitud : number
-  public latitud : number
-  public Institucion :Institucion 
-  public map:any;
-  public marker:any;
+export class LiderComponent implements OnInit {
+  public token: string
+  public Institucion: Institucion
+  public map: any;
+  public marker: any;
   public nombre;
-  public institutionsList:any[]=[];
-  public url:string
-  public markersList:any[]=[];
-  public todasInstituciones:any
-  public form: FormGroup; 
-  public Deparments:any[]=[]
-  public Cities: any[]=[]
-  public selectedDepartments: string="";
-  public selectedCities: string="";
-  public data:any[]=[];
-  public InstitutionFound:any[]=[]
-  public nombre_institucion:string="";
-  public nombre_rector:string="";
-  public telefono_rector:string="";
-  public nombre_coordinador:string="";
-  public telefono_coordinador:string="";
-  public telefono_institucion:string="";
-  public selectedId:number=0;
-  
+  public institutionsList: any[] = [];
+  public url: string
+  public markersList: any[] = [];
+  public todasInstituciones: any
+  public form: FormGroup;
+  public Deparments: any[] = []
+  public Cities: any[] = []
+  public selectedDepartments: string = "";
+  public selectedCities: string = "";
+  public data: any[] = [];
+  public InstitutionFound: any[] = []
+  public nombre_institucion: string = "";
+  public nombre_rector: string = "";
+  public telefono_rector: string = "";
+  public nombre_coordinador: string = "";
+  public telefono_coordinador: string = "";
+  public telefono_institucion: string = "";
+  public longitud: number;
+  public latitud: number;
+  public selectedId: number = 0;
+  public telefonos_ie:{}= {}
 
-  
+
+
 
   constructor(
-    private userservice:UsersService,
-    private mapaservice:MapaService,
-    private _userService:UsersService,
-    private auth:  AuthInterceptorServiceService,
+    private userservice: UsersService,
+    private _mapaservice: MapaService,
+    private _userService: UsersService,
+    private auth: AuthInterceptorServiceService,
     private _http: HttpClient,
     private router: Router,
     private formBuilder: FormBuilder,
-    
 
-  ) { 
+
+
+  ) {
     this.token = "";
     this.longitud = 0
     this.latitud = 0
-    this.Institucion = new Institucion("","","","",0,0,"","","","");
+    this.Institucion = new Institucion("", "", "", "", 0, 0, "", "", "", "");
     this.nombre = "",
-    this.url = global.url;
+      this.url = global.url;
+    // _mapaservice.ngOnInit()
 
     this.form = this.formBuilder.group({
-       Nombre_Institucion:['',Validators.required],
-       Nombre_Rector:['',Validators.required],
-       Telefono_Rector:['',Validators.required],
-       Nombre_Coordinador:['',Validators.required],
-       Telefono_Coordinador:['',Validators.required],
-       Telefono: ['',Validators.required],
-       Latitud: ['',Validators.required],
-       Longitud: ['',Validators.required],
-       selectedDepartments: ['',Validators.required],
-       selectedCities:['',Validators.required],
-      
+      Nombre_Institucion: ['', Validators.required],
+      Nombre_Rector: ['', Validators.required],
+      Telefono_Rector: ['', Validators.required],
+      Nombre_Coordinador: ['', Validators.required],
+      Telefono_Coordinador: ['', Validators.required],
+      Telefono: ['', Validators.required],
+      Latitud: ['', Validators.required],
+      Longitud: ['', Validators.required],
+      selectedDepartments: ['', Validators.required],
+      selectedCities: ['', Validators.required],
+
     });
-    
-const formdata = this.form.getRawValue()
+
+    const formdata = this.form.getRawValue()
   }
 
 
@@ -93,42 +96,42 @@ const formdata = this.form.getRawValue()
     this.initMap();
     //Api Socrata
     this._http.get<any[]>("https://www.datos.gov.co/resource/xdk5-pm3f.json").subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.data = data;
 
-      const NoEqualsDepartments:any = {};
+      const NoEqualsDepartments: any = {};
 
       this.data.forEach(item => {
         NoEqualsDepartments[item.departamento] = true;
       });
-      
+
       // this.Deparments = data.map(item => item.departamento);
       // console.log(this.Deparments);
       this.Deparments = Object.keys(NoEqualsDepartments);
-      
-      this.Cities = data.map(item => item.municipio);
-      console.log(this.Cities);
 
-     
-      
+      this.Cities = data.map(item => item.municipio);
+      // console.log(this.Cities);
+
+
+
     });
   }
 
 
-onDepartamentoChange(event: any) {
-  this.selectedDepartments = event.target.value;
-  this.Cities = this.data.filter(item => item.departamento === this.selectedDepartments)
-  .map(item => item.municipio);
-}
+  onDepartamentoChange(event: any) {
+    this.selectedDepartments = event.target.value;
+    this.Cities = this.data.filter(item => item.departamento === this.selectedDepartments)
+      .map(item => item.municipio);
+  }
 
 
 
-onMunicipioChange(event: any) {
-  this.selectedCities = event.target.value;
-}
+  onMunicipioChange(event: any) {
+    this.selectedCities = event.target.value;
+  }
 
 
-//FIN Api Socrata
+  //FIN Api Socrata
 
 
   private initMap() {
@@ -143,9 +146,9 @@ onMunicipioChange(event: any) {
       const marker = L.marker([institucion.lat, institucion.lng]).addTo(this.map);
       marker.bindPopup(institucion.nombre_institucion);
     }
-      this.marker = this.mapaservice.agregarMarcador(
+    this.marker = this._mapaservice.agregarMarcador(
       parseFloat(this.Institucion.lat.toString()), //convierte el dato del formulario de Number a number
-      parseFloat(this.Institucion.lng.toString()), 
+      parseFloat(this.Institucion.lng.toString()),
       this.nombre = this.Institucion.nombre_institucion.toString(),
     );
     this.marker.addTo(this.map);
@@ -154,7 +157,7 @@ onMunicipioChange(event: any) {
 
   //guarda una institucion obteniendo los datos del modal validados con formularios reactivos
 
-  saveInstitution(form:any){
+  saveInstitution(form: any) {
     // const formdata = this.form.getRawValue();
     console.log(this.Institucion);
     this._userService.saveInstitution(this.Institucion);
@@ -168,46 +171,47 @@ onMunicipioChange(event: any) {
     // Obtener las coordenadas del marcador
     const lat = this.Institucion.lat;
     const lng = this.Institucion.lng;
-  
+
     // Mover el marcador a las nuevas coordenadas
     this.marker.setLatLng([parseFloat(lat.toString()), parseFloat(lng.toString())]);
-  
+
     // Centrar el mapa en las nuevas coordenadas del marcador
     this.map.setView([parseFloat(lat.toString()), parseFloat(lng.toString())], 15);
-  
+
     form.reset();
     this.GetIntitutions();
-    
-   
+
+
   }
-  
 
-//obtiene todas las intituciones
-GetIntitutions(){
-  const token = this.auth.getToken()
-  console.log(token);
-  
-  let headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`
-  });
 
-  this._http.get(this.url + '/institucion/todos',{headers:headers}).subscribe(
-    (response:any) => {
-       this.institutionsList = response.TodasInstituciones;
-       console.log(this.institutionsList[0]);
-    
+  //obtiene todas las intituciones
+  GetIntitutions() {
+    const token = this.auth.getToken()
+    console.log(token);
 
-   }
-    
-    )}
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+
+    this._http.get(this.url + '/institucion/todos', { headers: headers }).subscribe(
+      (response: any) => {
+        this.institutionsList = response.TodasInstituciones;
+        console.log(this.institutionsList[0]);
+
+
+      }
+
+    )
+  }
 
   //Obtener una sola institucion
 
-  GetInstitution(id:number){
+  GetInstitution(id: number) {
     this.selectedId = id;
     this._userService.GetInstitution(id).subscribe(
-      (response:any) => {
+      (response: any) => {
         this.nombre_institucion = response.InstitucionFound.nombre_institucion;
         this.nombre_rector = response.InstitucionFound.nombre_rector;
         this.telefono_rector = response.InstitucionFound.telefonos_ie.telefono_rector;
@@ -216,9 +220,11 @@ GetIntitutions(){
         this.telefono_institucion = response.InstitucionFound.telefonos_ie.telefono_ie;
         this.latitud = response.InstitucionFound.ubicacion_geografica.lat;
         this.longitud = response.InstitucionFound.ubicacion_geografica.lng;
-        
+        // this.Deparments = response.InstitucionFound.departamento;
+        // this.Cities = response.InstitucionFound.municipio;
+
         this.userservice.GetIntitutions();
-        
+
       },
       err => {
         console.error(err);
@@ -226,33 +232,37 @@ GetIntitutions(){
     );
   }
 
-  UpdateInstitucion(id:number,form:any){//usando rxjs con observables
+  UpdateInstitucion(id: number, form: any) {//usando rxjs con observables
     const data = {
       nombre_institucion: this.nombre_institucion,
       nombre_rector: this.nombre_rector,
-      telefono_rector: this.telefono_rector,
+      telefonos_ie : {telefono_coordinador:this.telefono_coordinador,telefono_ie:this.telefono_institucion,telefono_rector:this.telefono_rector},      
       nombre_coordinador: this.nombre_coordinador,
-      telefono_coordinador: this.telefono_coordinador,
-      telefono_institucion: this.telefono_institucion,
       latitud: this.latitud,
       longitud: this.longitud,
       departamento: this.Institucion.departamento,
       municipio: this.Institucion.municipio
     };
-    this.userservice.UpdateInstitucion(id,data).subscribe(
+    
+    
+    console.log(data);
+    console.log(form.value);
+    
+    
+    this.userservice.UpdateInstitucion(id, data).subscribe(
       {
-        next:(response:any)=>{
-            console.log(response);
-            Swal.fire({
-              icon: 'success',
-              title: 'Actualización exitosa',
-              text: 'La institución ha sido actualizada correctamente'
-            });
-            this.GetIntitutions();
-            form.reset()
-                
+        next: (response: any) => {
+          console.log(response);
+          Swal.fire({
+            icon: 'success',
+            title: 'Actualización exitosa',
+            text: 'La institución ha sido actualizada correctamente'
+          });
+          this.GetIntitutions();
+          form.reset()
+
         },
-        error:err=>{
+        error: err => {
           console.error(err);
           Swal.fire({
             icon: "error",
@@ -263,60 +273,60 @@ GetIntitutions(){
       }
     )
   }
-  
 
 
 
-//borra la institucion pasandole como parametro el id      
-DeleteInstitucion(id: number,index:number) {
-        const token = this.auth.getToken();
-        let headers = new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        });
-      
-        
-        //Muestra el mensaje de confirmacion de  SweetAlert
-        Swal.fire({
-          title: '¿Estás seguro?',
-          text: 'Esta acción no se puede deshacer',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sí, borrar',
-          cancelButtonText: 'Cancelar',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            //Si el usuario confirma la accion , envia el Delete request
-            this._http.delete(this.url + '/institucion/borrar/' + id, { headers: headers }).subscribe(
-              (response: any) => {
-                this.institutionsList.splice(index,1)
-                console.log(this.institutionsList);
-                //Muestra un mensage usando SweetAlert
-                Swal.fire({
-                  title: 'Institución eliminada',
-                  icon: 'success'
-                });
-              },
-              (error: any) => {
-                  //Muestra un mensage de error usando SweetAlert
-                Swal.fire({
-                  title: 'Error al eliminar la institución',
-                  text: error.message,
-                  icon: 'error'
-                });
-              }
-            );
+
+  //borra la institucion pasandole como parametro el id      
+  DeleteInstitucion(id: number, index: number) {
+    const token = this.auth.getToken();
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    });
+
+
+    //Muestra el mensaje de confirmacion de  SweetAlert
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, borrar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //Si el usuario confirma la accion , envia el Delete request
+        this._http.delete(this.url + '/institucion/borrar/' + id, { headers: headers }).subscribe(
+          (response: any) => {
+            this.institutionsList.splice(index, 1)
+            console.log(this.institutionsList);
+            //Muestra un mensage usando SweetAlert
+            Swal.fire({
+              title: 'Institución eliminada',
+              icon: 'success'
+            });
+          },
+          (error: any) => {
+            //Muestra un mensage de error usando SweetAlert
+            Swal.fire({
+              title: 'Error al eliminar la institución',
+              text: error.message,
+              icon: 'error'
+            });
           }
-        });
+        );
       }
+    });
+  }
 
 
 
-        
-//Fin crud
+
+  //Fin crud
 
 
-  destroyToken(){
+  destroyToken() {
     Swal.fire({
       title: 'Esta usted Seguro?',
       icon: 'warning',
@@ -333,10 +343,10 @@ DeleteInstitucion(id: number,index:number) {
         }, 2500);
       }
     })
-    
-    
-   
-    }
+
+
+
+  }
 
 
 

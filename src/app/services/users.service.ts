@@ -114,7 +114,7 @@ export class UsersService implements AuthResponse {
     this._http.get(`${this.url}/institucion/todos`,{headers:headers}).subscribe(
       (response:any) => {
          this.institutionsList = response.TodasInstituciones;
-         console.log(this.institutionsList[0]);
+         console.log(this.institutionsList);
       
 
      }
@@ -131,6 +131,10 @@ export class UsersService implements AuthResponse {
 
      return this._http.get<any>(this.url + '/institucion/buscar/' + id,{headers:headers})
   } 
+
+
+//fin obtener institucion
+
 
 
   UpdateInstitucion(id:number,data:any):Observable<any>{
