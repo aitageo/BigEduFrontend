@@ -194,11 +194,55 @@ marker10.on('mouseout',(e)=> {
 })
 //Fin
 
+
+ //inicio
+ const marker11 = L.marker([6.282442630990462, -75.59028040404658],{
+  icon: L.icon({
+    iconUrl: '../assets/img/escudos/bellohorizonte.png',
+    iconSize: [80, 90],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+  })
+}).addTo(map);
+
+marker11.bindPopup(`Institución Educativa Bello Horizonte`);
+marker11.on('mouseover',(e)=> {
+  marker11.openPopup();
+})
+marker11.on('mouseout',(e)=> {
+  marker11.closePopup();
+})
+//Fin
+
+
+
+ //inicio
+ const marker12 = L.marker([6.226675180290584, -75.57884678685798],{
+  icon: L.icon({
+    iconUrl: '../assets/img/escudos/BenjaminHerrera.png',
+    iconSize: [80, 90],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+  })
+}).addTo(map);
+
+marker12.bindPopup(`Institución Educativa Benjamin Herrera`);
+marker12.on('mouseover',(e)=> {
+  marker12.openPopup();
+})
+marker12.on('mouseout',(e)=> {
+  marker12.closePopup();
+})
+//Fin
+
         
 }
 
-    
-  }
+
+}
+
+
+ 
 
 
  

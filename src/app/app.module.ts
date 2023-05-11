@@ -15,6 +15,7 @@ import { AuthInterceptorServiceService } from './services/auth-interceptor-servi
 import { InstructorComponent } from './components/instructor/instructor.component';
 import { LoginGuard } from './guardians/login.guard';
 import { MapaComponent } from './components/mapa/mapa.component';
+import { InstructoresComponent } from './components/instructores/instructores.component';
 
 
 
@@ -27,6 +28,7 @@ import { MapaComponent } from './components/mapa/mapa.component';
     NotFoundComponent,
     InstructorComponent,
     MapaComponent,
+    InstructoresComponent,
     
    
 

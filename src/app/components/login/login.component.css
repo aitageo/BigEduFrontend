@@ -7,106 +7,22 @@
     }
     
     body{
-    background-image: url("src/assets/img/medellin1.png");
+    background-image: url("src/assets/img/fondos/2estudiantes.jpg");
     
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
+    object-fit: cover;
     }
     
     main{
     width: 100%;
-    padding: 20px;
-    margin: auto;
-    margin-top: 100px;
+    padding: 10px;
+    margin:0;
     }
-    
-    /*MENU*/
-    
-    
-    .container #navbar
-    {
-        top: 0;
-        left: 0;
-        bottom: 10px;
-        width: 100%;
-        padding: 18px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.1);
-        
-    }
-    .container #navbar .logo
-    {
-        font-weight: 700;
-        text-transform: uppercase;
-        color:  white;
-        font-size: 1.8em;
-        text-decoration: none;
-        color: #ffa801;
-    
-    }
-    .container #navbar ul 
-    {
-        position: relative;
-        display: flex;
-        right: -25%;
-    }
-    
-    .container #navbar ul li 
-    {
-        list-style: none;
-        margin: 0 20px;
-    }
-    .container #navbar ul li a
-    {
-        position: relative;
-        text-decoration: none;
-        font-size: 18px;
-        padding: 4px 10px;
-        color:black;
-    }
-    .container #navbar ul li a:hover,
-    .container #navbar ul li a.active
-    {
-        background: #ffa801;
-        color: white;
-        border-radius: 20px;
-    }
-    .container .content
-    {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
-    .container .content .bannerText
-    {
-        position: relative;
-        max-width: 700px;
-    }
-    .container .content .bannerText div
-    {
-        display: none;
-        transition: 0.5 ease-in-out;
-    }
-    .container .content .bannerText div.active
-    {
-        display: initial;
-    }
-    .container .content .bannerText div h2
-    {
-        color:  #ffa801;
-        font-size: 6em;
-        line-height: 1em;
-        font-weight: 700;
-    }
-
-    .btn-primary {
-        color: #9bdd65;
-        background-color: #9bdd65;
-    }
+   
+   
     .btn
     {
         position: relative;
@@ -128,75 +44,18 @@
     .btn a{
         color:#fff;
     }
-    .btn:hover{
+    /* .btn:hover{
         background: #5EB319;
         color: #fff;
     
-    }
-    .container .content .bannerText div p
-    {
-        color: white;
-        font-size: 24px;
-        margin: 20px 10px;
-    
-    }
-    
-    .contenedor__todo{
-    width: 100%;
-    max-width: 800px;
-    margin: auto;
-    position: relative;
-    }
-    
-    .caja__trasera{
-    width: 100%;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: center;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    background-color: #082740;
-    
-    }
-    
-    .caja__trasera div{
-    margin: 100px 40px;
-    color: white;
-    transition: all 500ms;
-    }
+    } */
     
     
-    .caja__trasera div p,
-    .caja__trasera button{
-    margin-top: 30px;
-    }
+   
     
-    .caja__trasera div h3{
-    font-weight: 400;
-    font-size: 26px;
-    }
+    /*  */
     
-    .caja__trasera div p{
-    font-size: 16px;
-    font-weight: 300;
-    }
-    
-    .caja__trasera button{
-    padding: 10px 40px;
-    border: 2px solid #fff;
-    font-size: 14px;
-    background: transparent;
-    font-weight: 600;
-    cursor: pointer;
-    color: white;
-    outline: none;
-    transition: all 300ms;
-    }
-    
-    .caja__trasera button:hover{
-    background: #fff;
-    color: #ffa801;
-    }
+
     
     /*Formularios*/
     
@@ -205,8 +64,8 @@
     align-items: center;
     width: 100%;
     max-width: 380px;
-    position: relative;
-    top: 70px;
+    position: absolute;
+    top: 30px;
     left: 450px;
     
     /*La transicion va despues del codigo JS*/
@@ -215,10 +74,11 @@
     
     .contenedor__login-register form{
     width: 100%;
-    padding: 80px 20px;
+    padding: 50px 20px;
     background: white;
-    position: absolute;
+    position: relative;
     border-radius: 20px;
+    margin-left: 80px; /*  se cambio para que se vea el rostro */
     }
     
     .contenedor__login-register form h2{
@@ -233,21 +93,29 @@
     margin-top: 20px;
     padding: 10px;
     border: none;
-    background: #F2F2F2;
+    background: #ccc;
     font-size: 16px;
     outline: none;
     }
+
+    .contenedor__login-register form input[type="text"]:active {
+       border: none;
+    }
     
     .contenedor__login-register form button{
-    padding: 10px 40px;
-    margin-top: 40px;
+    padding: 15px 30px;
+    margin-top: 10px;
     border: none;
     font-size: 14px;
-    background: #082740;
     font-weight: 600;
     cursor: pointer;
     color: white;
     outline: none;
+    }
+    
+
+    .formulario__login button:hover{
+        background-color: #000;
     }
     
     
@@ -257,26 +125,19 @@
     opacity: 1;
     display: block;
     }
-    .formulario__register{
-    display: none;
-    }
+   
     
     /*FOOTER*/
-    
-    .pie{
-        background-color: #082740;	
-        margin-top: 18%;
-        padding: 30px;
-        width: 100%;
-        margin-bottom: 0px;
-    }
-        
+   
+         
         .copy{
             text-align: center;
-            color: #fff;
+            color: #000;
             letter-spacing: 2px;
             font-size: 15px;
             margin-top: 12px;
+            font-weight: 15px;
+            padding: 20px;
         }
         
         .mail{
@@ -297,53 +158,15 @@
         font-size: 30px;
         }
         
-        .contenedor-footer {
-        margin-top: 10%;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        width: 100%;
-        margin: auto;
+       
+
+        .social-media{
+            display: inline-block;
+            margin: auto;
+            margin-right: 30px;
+            padding: 2px 2px;
         }
-        
-        
-        .follow-us {
-        color: #fff;
-        font-size: 20px;
-        font-weight: 400;
-        margin-bottom: 16px;
-        text-transform: uppercase;
-        text-decoration: none;
-        letter-spacing: 2px;
-        }
-        
-        .social-media {
-        font-size: 30px;
-        -webkit-box-align: left;
-            -ms-flex-align: left;
-                align-items: left;
-        padding: 10px 10px 10px 10px;
-        color: #fff;
-        }
-        
-        
-        
-        .content-foo a {
-        color: rgb(187, 187, 187);
-        border: 1px solid rgb(124, 124, 124);
-        border-radius: 8px;
-        margin: 5px;
-        padding: 5px;
-        
-        }
-        
-        .content-foo a:hover {
-        color:#ffa801;
-        
-        }
-    
-    
-    
+         
     
     @media screen and (max-width: 850px){
     

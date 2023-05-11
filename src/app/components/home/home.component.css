@@ -5,10 +5,6 @@
     font-family: 'Roboto', sans-serif;
 }
 
-html, body {
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-}
 
 section .bannerVideo
 {
@@ -18,12 +14,12 @@ section .bannerVideo
  width: 100%;
  height: 100%;
 }
-
+/* 
 section .bannerVideo video.active
 {
     opacity: 1;
 
-}
+} */
 .container
 {
     position: relative;
@@ -33,7 +29,7 @@ section .bannerVideo video.active
     align-items: center;
     min-height: 90vh;
     width: 100%;
-    margin-left: 100px;
+    margin: auto;
 }
 .container::before
 {
@@ -420,6 +416,26 @@ color: red;
 	background-color: #082740;	
 	padding: 30px;
 }
+
+
+/* .pie-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .pie {
+    width: 100%;
+    max-width: 1200px; /* ajusta el valor según tu diseño */
+    /* margin: 0 auto;
+    padding: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #082740;
+  } */
 	
 	.copy{
 		text-align: center;

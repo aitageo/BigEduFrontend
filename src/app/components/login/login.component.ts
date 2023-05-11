@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   
 
   LoginUser(form: any) {
-    console.log(this.login);
+    //console.log(this.login);comentada para no sr visualizada
     this._userService.Login(this.login);
     if (this._userService.getErrorMessage()) {
       this.message = true;
