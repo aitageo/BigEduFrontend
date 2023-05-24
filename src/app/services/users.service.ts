@@ -4,13 +4,17 @@ import { Institucion } from '../models/institucion';
 import { HttpClient, HttpHeaders, HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
 import { global } from './global';
 import { application, response } from 'express';
-import { Observable } from 'rxjs';
+import { Observable, observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { TokenService } from './token.service';
 import { AuthInterceptorServiceService } from './auth-interceptor-service.service';
 import { AuthResponse } from '../interfaces/auth-response';
 import Swal from 'sweetalert2'
+//interfaces
+import { ResponseImage as ResImage, ResponseImage } from 'src/app/interfaces/response-image';
+import { User, DatosUser} from '../interfaces/user';
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +27,8 @@ export class UsersService implements AuthResponse {
   public errorMessage :string
   public institutionsList:any[]=[];
   public InstitutionFound:any[]=[]
+  public _id : string = "";
+  public urlImage: string = "";
 
   constructor(private _http: HttpClient,
               private router: Router,
@@ -42,19 +48,22 @@ export class UsersService implements AuthResponse {
     return this._http.post(this.url + '/usuario/nuevo', params, { headers: headers });
   }
 
-       Login(login: Login) {
+
+
+  Login(login: Login) {
     let params = JSON.stringify(login);
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    this._http.post<any>(this.url + '/usuario/login/', params, { headers: headers }).subscribe(
-      response => {
-        console.log(response)
-        console.log("Usuario Logueado"); 
+    this._http.post<User>(this.url + '/usuario/login/', params, { headers: headers }).subscribe(
+      (response: User) => {
+        this._id = response.user._id
+        console.log(this._id);
+        console.log("Usuario Logueado");
         this.router.navigate(['lider']);
         // this.token = (JSON.stringify(response));
         this.token = response.token
         console.log(`Èste es el token? ${this.token}`);
-        this.GetToken() 
+        this.GetToken()
         Swal.fire({
           icon: 'success',
           title: 'Bienvenido a Big Edu',
@@ -63,16 +72,16 @@ export class UsersService implements AuthResponse {
         });
       },
       err => {
-      console.error(err);
-      this.errorMessage = err
-      this.getErrorMessage();
-      Swal.fire({
-        title: 'Error!',
-        text: 'Usuario o Contraseña Invalidos',
-        icon: 'error',
-        confirmButtonText: 'Aceptar',
-        timer: 9500,
-      });
+        console.error(err);
+        this.errorMessage = err
+        this.getErrorMessage();
+        Swal.fire({
+          title: 'Error!',
+          text: 'Usuario o Contraseña Invalidos',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          timer: 9500,
+        });
       });
   }
 
@@ -103,12 +112,12 @@ export class UsersService implements AuthResponse {
 
 
   GetIntitutions(){
-    const token = this.auth.getToken()
-    console.log(token);
+    this.myToken = this.auth.getToken()
+    // console.log(token);
     
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${this.myToken}`
     });
 
     this._http.get(`${this.url}/institucion/todos`,{headers:headers}).subscribe(
@@ -148,6 +157,33 @@ export class UsersService implements AuthResponse {
 
   }
 
+
+  //cargar imagenes
+
+  uploadImages(image: File) {
+    const token = this.auth.getToken();
+    const formData = new FormData();
+    formData.append('image', image);
+    let headers = new HttpHeaders({
+      // 'Content-Type': 'multipart/form-data',
+      Authorization: `Bearer ${token}`
+    });
+    //manda la imagen en la peticion junto con las cabezeras
+    return this._http.post<ResImage>(`${this.url}/usuario/image/${this._id}`, formData, { headers: headers });
+
+  }
+
+
+  getImage(){
+    this.myToken = this.auth.getToken();
+    
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.myToken}`
+    });
+    return this._http.get<ResponseImage[]>(`${this.url}/image/`);
+    //obtiene un array con todas las imagenes
+  }
 
 
 

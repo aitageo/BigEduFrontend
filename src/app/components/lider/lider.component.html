@@ -45,11 +45,11 @@
           </div>
           <div class="form-outline mb-4">
             <input type="number" id="form6Example6" class="form-control" placeholder="Latitud" name="Latitud"
-              [(ngModel)]="Institucion.lat"  formControlName="Latitud" />
+              [(ngModel)]="Institucion.lat" formControlName="Latitud" />
           </div>
           <div class="form-outline mb-4">
             <input type="number" id="form6Example6" class="form-control" placeholder="Longitud" name="Longitud"
-              [(ngModel)]="Institucion.lng"  formControlName="Longitud" />
+              [(ngModel)]="Institucion.lng" formControlName="Longitud" />
           </div>
           <div class="form-outline mb-4">
             <label>Departamento:</label>
@@ -61,7 +61,7 @@
           <div>
             <label>Municipio:</label>
             <select formControlName="selectedCities" (change)="onMunicipioChange($event)" style="min-width: 160px;"
-              [(ngModel)]="Institucion.municipio"  name="municipio">
+              [(ngModel)]="Institucion.municipio" name="municipio">
               <option *ngFor="let mun of Cities">{{ mun}}</option>
             </select>
           </div>
@@ -135,14 +135,15 @@
             </div>
             <div class="form-outline mb-4">
               <label>Departamento:</label>
-              <select (change)="onDepartamentoChange($event)" [(ngModel)]="Institucion.departamento" name="departamento">
+              <select (change)="onDepartamentoChange($event)" [(ngModel)]="Institucion.departamento"
+                name="departamento">
                 <option *ngFor="let dep of Deparments">{{ dep }}</option>
               </select>
             </div>
             <div>
               <label>Municipio:</label>
-              <select (change)="onMunicipioChange($event)" style="min-width: 160px;"
-                [(ngModel)]="Institucion.municipio"  name="municipio">
+              <select (change)="onMunicipioChange($event)" style="min-width: 160px;" [(ngModel)]="Institucion.municipio"
+                name="municipio">
                 <option *ngFor="let mun of Cities">{{ mun}}</option>
               </select>
             </div>
@@ -160,6 +161,78 @@
 
 
 <!-- Fin Modal  EditarInstitucion-->
+
+
+
+<!-- Modal  SaveIntructor-->
+<div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Registrar Nuevo Instructor</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #RegisInsti="ngForm" (ngSubmit)="saveInstitution(RegisInsti)" [formGroup]="form">
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="form6Example1" class="form-control" placeholder="Nombre Instuctor"
+                  name="Nombre Institucion" [(ngModel)]="Institucion.nombre_institucion" [(ngModel)]="nombre"
+                  formControlName="Nombre_Institucion" />
+              </div>
+            </div>
+          </div>
+          <!-- Text input -->
+          <div class="form-outline mb-4">
+            <select name="documento" style="display:block">
+              <option value="cedula">Cédula</option>
+              <option value="tarjeta">Tarjeta de Identidad</option>
+              <option value="registro">Registro Civil</option>
+              <option value="permiso">Permiso de Permanencia</option>
+              <option value="permiso">Pasaporte</option>
+            </select>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example6" class="form-control" placeholder="Numero de Documento "
+              name="Telefono Rector" [(ngModel)]="Institucion.telefono_rector" formControlName="Telefono_Rector" />
+          </div>
+          <div class="form-outline mb-4">
+            <input type="email" id="form6Example6" class="form-control" placeholder="Correo misena"
+              name="Telefono Rector" [(ngModel)]="Institucion.telefono_rector" formControlName="Telefono_Rector" />
+          </div>
+          <div class="form-outline mb-4">
+            <input type="email" id="form6Example6" class="form-control" placeholder="Correo personal"
+              name="Telefono Rector" [(ngModel)]="Institucion.telefono_rector" formControlName="Telefono_Rector" />
+          </div>
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono Celular "
+              name="Telefono Rector" [(ngModel)]="Institucion.telefono_rector" formControlName="Telefono_Rector" />
+          </div>
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example6" class="form-control" placeholder="Telefono Alterno"
+              name="Telefono Rector" [(ngModel)]="Institucion.telefono_rector" formControlName="Telefono_Rector" />
+          </div>
+          <div class="form-outline mb-4">
+            <input type="text" id="form6Example6" class="form-control" placeholder="Direccion" name="Telefono Rector"
+              [(ngModel)]="Institucion.telefono_rector" formControlName="Telefono_Rector" />
+          </div>
+
+          <div class="text-center btn-toolbar">
+            <!-- Submit button --  btn-block mb-4 para que se vea en bloque----->
+            <button type="submit" class="btn btn-success" name="guardar" [disabled]="!form.valid">Guardar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fin Modal saveIntructor -->
+
 
 <!doctype html>
 <html lang="en">
@@ -194,8 +267,6 @@
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
               data-bs-parent="#accordionFlushExample">
-
-
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-primary" style="display: block;width:100%" data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop">
@@ -212,8 +283,11 @@
             </h2>
             <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
               data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body">
-              </div>
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" style="display: block;width:100%" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop2">
+                Registrar Nuevo Instructor
+              </button>
             </div>
           </div>
           <div class="accordion-item">
@@ -228,7 +302,8 @@
               <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
                 <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting
                 happening here in terms of content, but just filling up the space to make it look, at least at first
-                glance, a bit more representative of how this would look in a real-world application.</div>
+                glance, a bit more representative of how this would look in a real-world application.
+              </div>
             </div>
           </div>
         </div>
@@ -255,9 +330,14 @@
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
               <li class="nav-item dropdown">
                 <a class="nav-link text-dark dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false" (click)="destroyToken()">
-                  <img src="../assets/img/new_logo.png" class="img-fluid rounded-circle avatar mr-2" />logout</a>
-                <a href="" src="../assets/img/new_logo.png"></a>
+                  aria-haspopup="true" aria-expanded="false" (click)="destroyToken()">logout</a>
+              </li>
+              <li>   
+                <!-- profileimageurl es una propiedad que cambia segun cambie el componente -->
+                <img [src]="profileImageUrl" class="img-fluid rounded-circle avatar mr-3" (click)="fileInput.click()"
+                  style="cursor: pointer;width:90%" />
+                <input #fileInput type="file" accept="image/*" (change)="cargarImagen($event)" style="display: none"
+                 [ngModel]="profileImageUrl" (ngModelChange)="profileImageUrl = $event">
               </li>
             </ul>
           </div>

@@ -10,6 +10,8 @@ export class InstructorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("En el componente instructor");
+    
   }
 
 }

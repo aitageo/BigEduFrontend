@@ -14,7 +14,7 @@ export class AuthInterceptorServiceService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     // Obtener el token de autenticación del servicio TokenService
     const token = this.tokenService.getToken();
-    console.log(token);
+    // console.log(token);
     if (token) {
       req = req.clone({
         setHeaders: {

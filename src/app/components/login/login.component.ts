@@ -3,6 +3,7 @@ import { Login, Users } from 'src/app/models/users';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
   
 
   LoginUser(form: any) {
-    //console.log(this.login);comentada para no sr visualizada
+    // console.log(this.login);
     this._userService.Login(this.login);
     if (this._userService.getErrorMessage()) {
       this.message = true;

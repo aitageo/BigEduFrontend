@@ -11,11 +11,12 @@ import { LiderComponent } from './components/lider/lider.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UsersService } from './services/users.service';
 import { AuthInterceptorServiceService } from './services/auth-interceptor-service.service';
+import { NgOptimizedImage } from '@angular/common';
 
 import { InstructorComponent } from './components/instructor/instructor.component';
 import { LoginGuard } from './guardians/login.guard';
 import { MapaComponent } from './components/mapa/mapa.component';
-import { InstructoresComponent } from './components/instructores/instructores.component';
+
 
 
 
@@ -28,7 +29,7 @@ import { InstructoresComponent } from './components/instructores/instructores.co
     NotFoundComponent,
     InstructorComponent,
     MapaComponent,
-    InstructoresComponent,
+    
     
    
 
@@ -40,6 +41,7 @@ import { InstructoresComponent } from './components/instructores/instructores.co
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgOptimizedImage
     
   ],
   providers: [

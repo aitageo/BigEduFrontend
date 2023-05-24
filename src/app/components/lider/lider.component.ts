@@ -10,46 +10,51 @@ import * as L from 'leaflet';
 
 
 
+
+
 // import { marker } from 'leaflet';
 import { MapaService } from 'src/app/services/mapa.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ResponseImage } from 'src/app/interfaces/response-image';
+import { User } from '../../interfaces/user';
 
 
 @Component({
   selector: 'app-lider',
   templateUrl: './lider.component.html',
-  styleUrls: ['./lider.component.css']
+  styleUrls: ['./lider.component.css'],
 })
 export class LiderComponent implements OnInit {
-  public token: string
-  public Institucion: Institucion
+  public token: string;
+  public Institucion: Institucion;
   public map: any;
   public marker: any;
   public nombre;
   public institutionsList: any[] = [];
-  public url: string
+  public url: string;
   public markersList: any[] = [];
-  public todasInstituciones: any
+  public todasInstituciones: any;
   public form: FormGroup;
-  public Deparments: any[] = []
-  public Cities: any[] = []
-  public selectedDepartments: string = "";
-  public selectedCities: string = "";
+  public Deparments: any[] = [];
+  public Cities: any[] = [];
+  public selectedDepartments: string = '';
+  public selectedCities: string = '';
   public data: any[] = [];
-  public InstitutionFound: any[] = []
-  public nombre_institucion: string = "";
-  public nombre_rector: string = "";
-  public telefono_rector: string = "";
-  public nombre_coordinador: string = "";
-  public telefono_coordinador: string = "";
-  public telefono_institucion: string = "";
+  public InstitutionFound: any[] = [];
+  public nombre_institucion: string = '';
+  public nombre_rector: string = '';
+  public telefono_rector: string = '';
+  public nombre_coordinador: string = '';
+  public telefono_coordinador: string = '';
+  public telefono_institucion: string = '';
   public longitud: number;
   public latitud: number;
   public selectedId: number = 0;
-  public telefonos_ie:{}= {}
-
-
-
+  public telefonos_ie: {} = {};
+  public profileImageUrl: string = '../assets/img/new_logo.png';
+  public filename: string = "";
+  public filepath :string = "";
+  public file!: File  ;
 
   constructor(
     private userservice: UsersService,
@@ -58,17 +63,13 @@ export class LiderComponent implements OnInit {
     private auth: AuthInterceptorServiceService,
     private _http: HttpClient,
     private router: Router,
-    private formBuilder: FormBuilder,
-
-
-
+    private formBuilder: FormBuilder
   ) {
-    this.token = "";
-    this.longitud = 0
-    this.latitud = 0
-    this.Institucion = new Institucion("", "", "", "", 0, 0, "", "", "", "");
-    this.nombre = "",
-      this.url = global.url;
+    this.token = '';
+    this.longitud = 0;
+    this.latitud = 0;
+    this.Institucion = new Institucion('', '', '', '', 0, 0, '', '', '', '');
+    (this.nombre = ''), (this.url = global.url);
     // _mapaservice.ngOnInit()
 
     this.form = this.formBuilder.group({
@@ -82,74 +83,70 @@ export class LiderComponent implements OnInit {
       Longitud: ['', Validators.required],
       selectedDepartments: ['', Validators.required],
       selectedCities: ['', Validators.required],
-
     });
 
-    const formdata = this.form.getRawValue()
+    const formdata = this.form.getRawValue();
   }
-
-
-
 
   ngOnInit(): void {
     this.GetIntitutions();
     this.initMap();
+    this.showImage(); //cargar foto de perfil
+    
+    
     //Api Socrata
-    this._http.get<any[]>("https://www.datos.gov.co/resource/xdk5-pm3f.json").subscribe(data => {
-      // console.log(data);
-      this.data = data;
+    this._http
+      .get<any[]>('https://www.datos.gov.co/resource/xdk5-pm3f.json')
+      .subscribe((data) => {
+        // console.log(data);
+        this.data = data;
 
-      const NoEqualsDepartments: any = {};
+        const NoEqualsDepartments: any = {};
 
-      this.data.forEach(item => {
-        NoEqualsDepartments[item.departamento] = true;
+        this.data.forEach((item) => {
+          NoEqualsDepartments[item.departamento] = true;
+        });
+
+        // this.Deparments = data.map(item => item.departamento);
+        // console.log(this.Deparments);
+        this.Deparments = Object.keys(NoEqualsDepartments);
+
+        this.Cities = data.map((item) => item.municipio);
+        // console.log(this.Cities);
       });
-
-      // this.Deparments = data.map(item => item.departamento);
-      // console.log(this.Deparments);
-      this.Deparments = Object.keys(NoEqualsDepartments);
-
-      this.Cities = data.map(item => item.municipio);
-      // console.log(this.Cities);
-
-
-
-    });
   }
-
 
   onDepartamentoChange(event: any) {
     this.selectedDepartments = event.target.value;
-    this.Cities = this.data.filter(item => item.departamento === this.selectedDepartments)
-      .map(item => item.municipio);
+    this.Cities = this.data
+      .filter((item) => item.departamento === this.selectedDepartments)
+      .map((item) => item.municipio);
   }
-
-
 
   onMunicipioChange(event: any) {
     this.selectedCities = event.target.value;
   }
 
-
   //FIN Api Socrata
-
 
   private initMap() {
     this.map = L.map('map').setView([6.2486069, -75.5742467], 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 17,
-      attribution: 'Map data © OpenStreetMap contributors'
+      attribution: 'Map data © OpenStreetMap contributors',
     }).addTo(this.map);
 
     for (let i = 0; i < this.institutionsList.length; i++) {
       const institucion = this.institutionsList[i];
-      const marker = L.marker([institucion.lat, institucion.lng]).addTo(this.map);
+      const marker = L.marker([institucion.lat, institucion.lng]).addTo(
+        this.map
+      );
       marker.bindPopup(institucion.nombre_institucion);
     }
     this.marker = this._mapaservice.agregarMarcador(
       parseFloat(this.Institucion.lat.toString()), //convierte el dato del formulario de Number a number
       parseFloat(this.Institucion.lng.toString()),
-      this.nombre = this.Institucion.nombre_institucion.toString(),
+      (this.nombre = this.Institucion.nombre_institucion.toString())
     );
     this.marker.addTo(this.map);
     // this.markersList.push({lat,lng,this.nombre})
@@ -162,48 +159,48 @@ export class LiderComponent implements OnInit {
     console.log(this.Institucion);
     this._userService.saveInstitution(this.Institucion);
     this.userservice.GetIntitutions();
-    this.GetIntitutions()
+    this.GetIntitutions();
     Swal.fire({
       icon: 'success',
       title: 'Registro Guardado',
-      timer: 1200
+      timer: 1200,
     });
     // Obtener las coordenadas del marcador
     const lat = this.Institucion.lat;
     const lng = this.Institucion.lng;
 
     // Mover el marcador a las nuevas coordenadas
-    this.marker.setLatLng([parseFloat(lat.toString()), parseFloat(lng.toString())]);
+    this.marker.setLatLng([
+      parseFloat(lat.toString()),
+      parseFloat(lng.toString()),
+    ]);
 
     // Centrar el mapa en las nuevas coordenadas del marcador
-    this.map.setView([parseFloat(lat.toString()), parseFloat(lng.toString())], 15);
+    this.map.setView(
+      [parseFloat(lat.toString()), parseFloat(lng.toString())],
+      15
+    );
 
     form.reset();
     this.GetIntitutions();
-
-
   }
-
 
   //obtiene todas las intituciones
   GetIntitutions() {
-    const token = this.auth.getToken()
-    console.log(token);
+    const token = this.auth.getToken();
+    // console.log(token);
 
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
 
-    this._http.get(this.url + '/institucion/todos', { headers: headers }).subscribe(
-      (response: any) => {
+    this._http
+      .get(this.url + '/institucion/todos', { headers: headers })
+      .subscribe((response: any) => {
         this.institutionsList = response.TodasInstituciones;
-        console.log(this.institutionsList[0]);
-
-
-      }
-
-    )
+        // console.log(this.institutionsList[0]);
+      });
   }
 
   //Obtener una sola institucion
@@ -214,77 +211,75 @@ export class LiderComponent implements OnInit {
       (response: any) => {
         this.nombre_institucion = response.InstitucionFound.nombre_institucion;
         this.nombre_rector = response.InstitucionFound.nombre_rector;
-        this.telefono_rector = response.InstitucionFound.telefonos_ie.telefono_rector;
+        this.telefono_rector =
+          response.InstitucionFound.telefonos_ie.telefono_rector;
         this.nombre_coordinador = response.InstitucionFound.nombre_coordinador;
-        this.telefono_coordinador = response.InstitucionFound.telefonos_ie.telefono_coordinador;
-        this.telefono_institucion = response.InstitucionFound.telefonos_ie.telefono_ie;
+        this.telefono_coordinador =
+          response.InstitucionFound.telefonos_ie.telefono_coordinador;
+        this.telefono_institucion =
+          response.InstitucionFound.telefonos_ie.telefono_ie;
         this.latitud = response.InstitucionFound.ubicacion_geografica.lat;
         this.longitud = response.InstitucionFound.ubicacion_geografica.lng;
         // this.Deparments = response.InstitucionFound.departamento;
         // this.Cities = response.InstitucionFound.municipio;
 
         this.userservice.GetIntitutions();
-
       },
-      err => {
+      (err) => {
         console.error(err);
       }
     );
   }
 
-  UpdateInstitucion(id: number, form: any) {//usando rxjs con observables
+  UpdateInstitucion(id: number, form: any) {
+    //usando rxjs con observables
     const data = {
       nombre_institucion: this.nombre_institucion,
       nombre_rector: this.nombre_rector,
-      telefonos_ie : {telefono_coordinador:this.telefono_coordinador,telefono_ie:this.telefono_institucion,telefono_rector:this.telefono_rector},      
+      telefonos_ie: {
+        telefono_coordinador: this.telefono_coordinador,
+        telefono_ie: this.telefono_institucion,
+        telefono_rector: this.telefono_rector,
+      },
       nombre_coordinador: this.nombre_coordinador,
       latitud: this.latitud,
       longitud: this.longitud,
       departamento: this.Institucion.departamento,
-      municipio: this.Institucion.municipio
+      municipio: this.Institucion.municipio,
     };
-    
-    
+
     console.log(data);
     console.log(form.value);
-    
-    
-    this.userservice.UpdateInstitucion(id, data).subscribe(
-      {
-        next: (response: any) => {
-          console.log(response);
-          Swal.fire({
-            icon: 'success',
-            title: 'Actualización exitosa',
-            text: 'La institución ha sido actualizada correctamente'
-          });
-          this.GetIntitutions();
-          form.reset()
 
-        },
-        error: err => {
-          console.error(err);
-          Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: "Ha ocurrido un error al procesar la solicitud."
-          });
-        }
-      }
-    )
+    this.userservice.UpdateInstitucion(id, data).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Actualización exitosa',
+          text: 'La institución ha sido actualizada correctamente',
+        });
+        this.GetIntitutions();
+        form.reset();
+      },
+      error: (err) => {
+        console.error(err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Ha ocurrido un error al procesar la solicitud.',
+        });
+      },
+    });
   }
 
-
-
-
-  //borra la institucion pasandole como parametro el id      
+  //borra la institucion pasandole como parametro el id
   DeleteInstitucion(id: number, index: number) {
     const token = this.auth.getToken();
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
-
 
     //Muestra el mensaje de confirmacion de  SweetAlert
     Swal.fire({
@@ -297,34 +292,32 @@ export class LiderComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         //Si el usuario confirma la accion , envia el Delete request
-        this._http.delete(this.url + '/institucion/borrar/' + id, { headers: headers }).subscribe(
-          (response: any) => {
-            this.institutionsList.splice(index, 1)
-            console.log(this.institutionsList);
-            //Muestra un mensage usando SweetAlert
-            Swal.fire({
-              title: 'Institución eliminada',
-              icon: 'success'
-            });
-          },
-          (error: any) => {
-            //Muestra un mensage de error usando SweetAlert
-            Swal.fire({
-              title: 'Error al eliminar la institución',
-              text: error.message,
-              icon: 'error'
-            });
-          }
-        );
+        this._http
+          .delete(this.url + '/institucion/borrar/' + id, { headers: headers })
+          .subscribe(
+            (response: any) => {
+              this.institutionsList.splice(index, 1);
+              console.log(this.institutionsList);
+              //Muestra un mensage usando SweetAlert
+              Swal.fire({
+                title: 'Institución eliminada',
+                icon: 'success',
+              });
+            },
+            (error: any) => {
+              //Muestra un mensage de error usando SweetAlert
+              Swal.fire({
+                title: 'Error al eliminar la institución',
+                text: error.message,
+                icon: 'error',
+              });
+            }
+          );
       }
     });
   }
 
-
-
-
   //Fin crud
-
 
   destroyToken() {
     Swal.fire({
@@ -334,21 +327,67 @@ export class LiderComponent implements OnInit {
       confirmButtonColor: '#3085d6',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          'Se cerrara la sesion!',
-          'success'
-        )//espera a que el cliente de click para eliminar el token
+        Swal.fire('Se cerrara la sesion!', 'success'); //espera a que el cliente de click para eliminar el token
         setTimeout(() => {
-          this.userservice.destroyToken()
+          this.userservice.destroyToken();
         }, 2500);
       }
-    })
-
-
-
+    });
   }
 
 
+  //cargar imagen
 
-
+  cargarImagen(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      this.file = event.target.files[0];
+      console.log(this.file);
+  
+      const reader = new FileReader();//objeto para leer el archivo
+  
+      reader.onload = (e: any) => {
+        this.profileImageUrl = e.target.result;//cambia la imagen por defecto a la que cargue el usuario
+        this.UploadImage();
+      };
+  
+      reader.readAsDataURL(this.file);
+    }
+  }
+  //toma el archivo de la funcion anterior y lo manda en la peticion para obtener el filename
+  UploadImage(): void {
+    this.userservice.uploadImages(this.file).subscribe(res => {
+      console.log(res);
+  
+      const fileimage = res.fileName;//usa la interfaz response-image
+      console.log(fileimage);
+  
+      this.filename = fileimage.replace(/['"]+/g, '');
+      this.showImage();
+    });
+  }
+  
+  showImage(): void {
+    console.log(this.filename);
+  
+    this.userservice.getImage().subscribe({
+      next: (res) => {
+        console.log(res);
+        if (res && res.length > 0) {//comprueba si la imagen o el filename cargada es igual a la de la base de datos
+          const image = res.find(item => item.fileName === this.filename);
+          if (image) {
+            this.profileImageUrl = image.filePath;
+          }
+          else {
+            const firstImage = res[2];
+            this.profileImageUrl = firstImage.filePath;
+          }
+        }
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+  
+    
 }
