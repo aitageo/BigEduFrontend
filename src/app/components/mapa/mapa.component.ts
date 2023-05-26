@@ -19,7 +19,8 @@ export class MapaComponent implements OnInit {
     '../assets/img/escudos/antonioricaurte.png',
     '../assets/img/escudos/AsambleaDepartamental.png',
     '../assets/img/escudos/bellohorizonte.png',
-    '../assets/img/escudos/BenjaminHerrera.png'
+    '../assets/img/escudos/BenjaminHerrera.png',
+    '../assets/img/escudos/BetsabeEspinal.png'
   ];
 
   constructor(private http: HttpClient) { }
@@ -261,7 +262,31 @@ marker12.openPopup();
 marker12.on('mouseout',(e)=> {
 marker12.closePopup();
 }) 
+
+ //inicio
+ const marker13 = L.marker([6.344324482568894, -75.5414300942473],{
+  icon: L.icon({
+  iconUrl:  '../assets/img/escudos/BetsabeEspinal.png',
+  iconSize: [80, 90],
+  iconAnchor: [22, 94],
+  popupAnchor: [-3, -76],
+  })
+  }).addTo(map);
+  
+  marker13.bindPopup(`Institución Educativa Betsabel Espinal`);
+  marker13.on('mouseover',(e)=> {
+  marker13.openPopup();
+  })
+  marker13.on('mouseout',(e)=> {
+  marker13.closePopup();
+  })
+  //Fin
+
   }
+
+
+   
+   
 }
 
 
