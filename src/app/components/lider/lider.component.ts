@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { AuthInterceptorServiceService } from 'src/app/services/auth-interceptor-service.service';
 import { HttpClient, HttpHeaders, HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
@@ -55,6 +55,7 @@ export class LiderComponent implements OnInit {
   public filename: string = "";
   public filepath :string = "";
   public file!: File  ;
+  @Input() Allmarkers:string[]= [];
 
   constructor(
     private userservice: UsersService,

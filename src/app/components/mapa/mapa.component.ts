@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import * as L from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,6 +8,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./mapa.component.css']
 })
 export class MapaComponent implements OnInit {
+
+
+  @Output() allMarkersChange: EventEmitter<any[]> = new EventEmitter<any[]>();
+
+  private addAllMarkers(map: L.Map): void {
+
+    this.allMarkersChange.emit(this.AllMarkers);
+  }
+
+  private AllMarkers:any[] = [];
   private imageUrls = [
     '../assets/img/presbitero.jpg',
     '../assets/img/joseMiguel.png',
@@ -261,8 +271,13 @@ marker12.openPopup();
 marker12.on('mouseout',(e)=> {
 marker12.closePopup();
 }) 
+
+this.AllMarkers = [marker,marker2,marker3,marker4,marker4,marker5,marker6,marker8,marker9,marker10,marker11,marker12]
+console.log(this.AllMarkers);
+
+  
+    }
   }
-}
 
 
 
