@@ -23,7 +23,7 @@
     }
    
    
-    .btn
+    .btn 
     {
         position: relative;
         display: inline-block;
@@ -44,19 +44,7 @@
     .btn a{
         color:#fff;
     }
-    /* .btn:hover{
-        background: #5EB319;
-        color: #fff;
-    
-    } */
-    
-    
-   
-    
-    /*  */
-    
 
-    
     /*Formularios*/
     
     .formulario__login{
@@ -135,9 +123,9 @@
             color: #000;
             letter-spacing: 2px;
             font-size: 15px;
-            margin-top: 12px;
+            margin-top: 40px;
             font-weight: 15px;
-            padding: 20px;
+            padding: 28px;
         }
         
         .mail{
@@ -160,12 +148,39 @@
         
        
 
-        .social-media{
-            display: inline-block;
-            margin: auto;
-            margin-right: 30px;
-            padding: 2px 2px;
-        }
+    /* Estilos para la sección de redes sociales fija */
+.social-media-fixed {
+    position: fixed;
+    top: 50%; /* Ajusta según tu preferencia para la posición vertical */
+    left: 20px; /* Ajusta según tu preferencia para la posición horizontal */
+    transform: translateY(-50%); /* Centra verticalmente */
+    z-index: 1000; /* Asegura que la sección aparezca sobre otros elementos */
+  }
+  
+  /* Estilos para la lista de iconos */
+  .social-icons {
+    list-style: none;
+    display: flex;
+    flex-direction: column; /* Muestra los íconos en una columna */
+    gap: 20px; /* Ajusta el espacio entre los íconos */
+    padding: 0;
+  }
+  
+  /* Estilos para cada ícono */
+  .social-icons li {
+    display: flex;
+  }
+  
+  .social-icons a {
+    display: flex;
+  }
+  
+  /* Estilos para los íconos */
+  .social-icons i {
+    font-size: 30px; /* Ajusta el tamaño de los íconos */
+  }
+  
+
          
     
     @media screen and (max-width: 850px){

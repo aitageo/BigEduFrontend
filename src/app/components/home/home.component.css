@@ -14,12 +14,7 @@ section .bannerVideo
  width: 100%;
  height: 100%;
 }
-/* 
-section .bannerVideo video.active
-{
-    opacity: 1;
 
-} */
 .container
 {
     position: relative;
@@ -100,7 +95,7 @@ section .bannerVideo video.active
 {
     position: relative;
     max-width: 700px;
-}
+}/* texto de bigedu */
 .container .content .bannerText div
 {
     display: none;
@@ -117,15 +112,18 @@ section .bannerVideo video.active
     line-height: 1em;
     font-weight: 700;
 }
+
+
+
+
 .btn
 {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
     text-decoration: none;
-    background: #082740;
     color: white;
-    font-size: 24px;
+    font-size: 34px;
     font-weight: 500;
     border-radius: 24px;
     letter-spacing: 1px;
@@ -137,39 +135,39 @@ section .bannerVideo video.active
     font-size: 24px;
     margin: 20px 10px;
 
-}
-.sci
-{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-
 }/*redes sociales*/
-.sci li 
-{
-    list-style: none;
-}
-.sci li a 
-{
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    background: white;
-}
-.sci li a:hover
-{
-    background: #ffa801;
-
-}
-.sci li a img
-{
-    display: inline-block;
-    max-height: 24px;
-}
+    .social-media-fixed {
+        position: fixed;
+        top: 50%; 
+        left: 20px; 
+        transform: translateY(-50%); /* Centra verticalmente */
+        z-index: 1000; /* Asegura que la sección aparezca sobre otros elementos */
+      }
+      
+      /* Estilos para la lista de iconos */
+      .social-icons {
+        list-style: none;
+        display: flex;
+        flex-direction: column; /* Muestra los íconos en una columna */
+        gap: 20px; /* Ajusta el espacio entre los íconos */
+        padding: 0;
+      }
+      
+      /* Estilos para cada ícono */
+      .social-icons li {
+        display: flex;
+        
+      }
+      
+      .social-icons a {
+        display: flex;
+        text-decoration: none;
+      }
+      
+      /* Estilos para los íconos */
+      .social-icons i {
+        font-size: 30px; /* Ajusta el tamaño de los íconos */
+      }
 
 /*Responsive de la pagina*/
 @media (max-width:991px)
@@ -417,27 +415,7 @@ color: red;
 	padding: 30px;
 }
 
-
-/* .pie-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .pie {
-    width: 100%;
-    max-width: 1200px; /* ajusta el valor según tu diseño */
-    /* margin: 0 auto;
-    padding: 50px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    background-color: #082740;
-  } */
-	
-	.copy{
+.copy{
 		text-align: center;
 		color: #fff;
 		letter-spacing: 2px;

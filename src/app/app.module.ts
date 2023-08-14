@@ -16,6 +16,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { InstructorComponent } from './components/instructor/instructor.component';
 import { LoginGuard } from './guardians/login.guard';
 import { MapaComponent } from './components/mapa/mapa.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 
@@ -41,7 +42,7 @@ import { MapaComponent } from './components/mapa/mapa.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgOptimizedImage
+    LazyLoadImageModule
     
   ],
   providers: [
