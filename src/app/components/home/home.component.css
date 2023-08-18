@@ -13,6 +13,7 @@ section .bannerVideo
  left: 0;
  width: 100%;
  height: 100%;
+ background-image: url('../../../assets/img/fondo.jpg');
 }
 
 .container
@@ -37,7 +38,7 @@ section .bannerVideo
     backdrop-filter: blur(10px);
     box-shadow: 10px 0 15px rgba(0,0,0,0.05);
     box-sizing: border-box;
-    
+
 }
 .container header
 {
@@ -48,8 +49,13 @@ section .bannerVideo
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 100px;
+    padding: 50px 100px;
 }
+
+.container header button:hover {
+    color: #ffa801;
+}
+
 #navbar .logo
 {
     font-weight: 700;
@@ -61,21 +67,28 @@ section .bannerVideo
 }
 
 .logo {
-    font-weight: 700;
+    font-weight: 900;
     text-transform: uppercase;
     color:  white;
     font-size: 1.8em;
-    text-decoration: none;  
+    text-decoration: none;
+}
+
+.logo:hover{
+    animation: heartBeat;
+    animation-duration: 1s;
+    margin:  0 0.5rem;
+    display: inline-block;
 }
 
 
-.container header ul 
+.container header ul
 {
     position: relative;
     display: flex;
 }
 
-.container header ul li 
+.container header ul li
 {
     list-style: none;
     margin: 0 20px;
@@ -135,15 +148,18 @@ section .bannerVideo
     font-size: 24px;
     margin: 20px 10px;
 
-}/*redes sociales*/
+}
+
+/*redes sociales*/
+
     .social-media-fixed {
         position: fixed;
-        top: 50%; 
-        left: 20px; 
+        top: 50%;
+        left: 20px;
         transform: translateY(-50%); /* Centra verticalmente */
         z-index: 1000; /* Asegura que la sección aparezca sobre otros elementos */
       }
-      
+
       /* Estilos para la lista de iconos */
       .social-icons {
         list-style: none;
@@ -152,24 +168,26 @@ section .bannerVideo
         gap: 20px; /* Ajusta el espacio entre los íconos */
         padding: 0;
       }
-      
+
       /* Estilos para cada ícono */
       .social-icons li {
         display: flex;
-        
+
       }
-      
+
       .social-icons a {
         display: flex;
         text-decoration: none;
       }
-      
+
       /* Estilos para los íconos */
       .social-icons i {
-        font-size: 30px; /* Ajusta el tamaño de los íconos */
+        font-size: 20px; /* Ajusta el tamaño de los íconos */
+        margin-left: 0px;
       }
 
 /*Responsive de la pagina*/
+
 @media (max-width:991px)
 {
 .container
@@ -192,7 +210,7 @@ font-size: 3em;
 {
     text-align: center;
 }
-.container header ul 
+.container header ul
 {
     position: fixed;
     top: 0;
@@ -206,17 +224,17 @@ font-size: 3em;
     justify-content: center;
     flex-direction: column;
 }
-.container header.active ul 
+.container header.active ul
 {
     display: flex;
 }
-.container header ul li 
+.container header ul li
 {
     text-align: center;
     margin: 10px;
 
 }
-.container header ul li a 
+.container header ul li a
 {
 color: #333;
 font-size: 1.5em;
@@ -234,7 +252,6 @@ color: red;
     height: 50px;
     display: flex;
     z-index: 10000;
-    /*background: #ffa801 url(menu.png);*/
     background-size: 30px;
     background-repeat: no-repeat;
     background-repeat: no-repeat;
@@ -258,12 +275,12 @@ color: red;
     transition: 0.2s;
     transform: translateY(-10px);
     box-shadow: 0 10px 0 #fff;
-    
+
 }
 .menuIcon.active::before
 {
     transform: translateY(0px)rotate(45deg);
-    box-shadow: 0 0 0 #fff; 
+    box-shadow: 0 0 0 #fff;
 }
 .menuIcon::after
 {
@@ -274,8 +291,8 @@ color: red;
     background: #fff;
     transition: 0.2s;
     transform: translateY(10px);
-    
-    
+
+
 }
 .menuIcon.active::after
 {
@@ -295,8 +312,6 @@ color: red;
 
 }
 
-/*COMO JUGAR*/
-
 .cuerpo
 {
     display: block;
@@ -314,7 +329,7 @@ color: red;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-gap: 15px;
     margin: 0 auto;
-   
+
 }
 
 .contenedor .card
@@ -325,7 +340,7 @@ color: red;
     margin: 0 auto;
     background: white;
     transition: 0.5s;
-   
+
 }
 
 .contenedor .card:hover
@@ -375,7 +390,7 @@ color: red;
 .contenedor .card .face.face2
 {
     background: #ffa801;
- 
+
     transition: 0.5s;
 }
 
@@ -411,7 +426,7 @@ color: red;
 /*FOOTER*/
 
 .pie{
-	background-color: #082740;	
+	background-color: #082740;
 	padding: 30px;
 }
 
@@ -422,28 +437,28 @@ color: red;
 		font-size: 15px;
 		margin-top: 10px;
 	}
-	
+
 	.mail{
 		display: flex;
 		align-items: center;
 		margin-bottom: 8px;
 	}
-	
+
 	.mail p{
 		color: #fff;
 		letter-spacing: 2px;
 		font-size: 15px;
 	}
-	
+
 	.mail>i{
 	color: rgb(187, 187, 187);
 	padding: 5px;
 	font-size: 30px;
 	}
-	
-	
-	
-	
+
+
+
+
 	.follow-us {
 	color: #fff;
 	font-size: 20px;
@@ -453,38 +468,76 @@ color: red;
 	text-decoration: none;
 	letter-spacing: 2px;
 	}
-	
 
-	
-	
-	
+
+
+
+
 	.content-foo a {
 	color: rgb(187, 187, 187);
 	border: 1px solid rgb(124, 124, 124);
 	border-radius: 8px;
 	margin: 5px;
 	padding: 5px;
-	
+
 	}
-	
+
 	.content-foo a:hover {
 	color:#ffa801;
-	
+
 	}
 
 
 
-/* .mapa{
-    width: 100%;
-    height: 40px;
-    border: 1px solid #fff;
-    outline: none;
-    background: transparent;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 300;
-    
+/* responsive */
 
-    
-    
-} */
+@media only screen and ( max-width:390px) {
+
+    .active p {
+        font-size: 1px;
+    }
+
+    .bannerVideo img {
+        width: 20%;
+        height: 20%;
+    }
+}
+
+@media  screen and (max-width: 720px) /* para abajo*/ {
+    .cuerpo {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .face.face2 {
+        margin-bottom: 5rem;
+    }
+
+
+    .active {
+        width: auto;
+    }
+
+    .active p {
+     font-size: 1rem;
+    }
+
+    .social-icons {
+        width: 5%;
+        height: 5%;
+    }
+
+    section .bannerVideo {
+    position: absolute;
+    background-image: url('../../../assets/img/fondo.jpg');
+    top: 0;
+    left: 0;
+    }
+
+    .bannerVideo img {
+        width: 50%;
+        height: 50%;
+    }
+
+}
+
