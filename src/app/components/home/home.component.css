@@ -13,7 +13,9 @@ section .bannerVideo
  left: 0;
  width: 100%;
  height: 100%;
- background-image: url('../../../assets/img/fondo.jpg');
+ background-image: url('../../../assets/img/fondos/3estudiantes.jpg');
+ background-repeat: no-repeat;
+ background-size: cover;
 }
 
 .container
@@ -27,7 +29,7 @@ section .bannerVideo
     width: 100%;
     margin: auto;
 }
-.container::before
+/* .container::before /comentado el 18/08/2023
 {
     content:'' ;
     position: absolute;
@@ -39,7 +41,7 @@ section .bannerVideo
     box-shadow: 10px 0 15px rgba(0,0,0,0.05);
     box-sizing: border-box;
 
-}
+} */
 .container header
 {
     position: absolute;
@@ -53,7 +55,7 @@ section .bannerVideo
 }
 
 .container header button:hover {
-    color: #ffa801;
+    color: #26ca;
 }
 
 #navbar .logo
@@ -107,6 +109,7 @@ section .bannerVideo
 .container .content .bannerText
 {
     position: relative;
+    margin-top: 200px;
     max-width: 700px;
 }/* texto de bigedu */
 .container .content .bannerText div
@@ -118,6 +121,14 @@ section .bannerVideo
 {
     display: initial;
 }
+
+.container .content .bannerText div.active p {
+    color: #26cb;
+    margin-top: 20rem;
+    margin-left: 9rem;
+    font-size: 1rem;
+}/*                                                     */
+
 .container .content .bannerText div h2
 {
     color:  #ffa801;
@@ -142,13 +153,13 @@ section .bannerVideo
     letter-spacing: 1px;
     margin: 10px;
 }
-.container .content .bannerText div p
+/* .container .content .bannerText div p
 {
     color: white;
     font-size: 24px;
     margin: 20px 10px;
 
-}
+} */
 
 /*redes sociales*/
 
@@ -265,39 +276,8 @@ color: red;
 {
     background: red;
 }
-.menuIcon::before
-{
-    content: '';
-    position: absolute;
-    width: 28px;
-    height: 2px;
-    background: #fff;
-    transition: 0.2s;
-    transform: translateY(-10px);
-    box-shadow: 0 10px 0 #fff;
-
-}
-.menuIcon.active::before
-{
-    transform: translateY(0px)rotate(45deg);
-    box-shadow: 0 0 0 #fff;
-}
-.menuIcon::after
-{
-    content: '';
-    position: absolute;
-    width: 28px;
-    height: 2px;
-    background: #fff;
-    transition: 0.2s;
-    transform: translateY(10px);
 
 
-}
-.menuIcon.active::after
-{
-    transform: translateY(0px)rotate(-45deg);
-}
 
 .sci li a
 {
@@ -457,22 +437,6 @@ color: red;
 	}
 
 
-
-
-	.follow-us {
-	color: #fff;
-	font-size: 20px;
-	font-weight: 400;
-	margin-bottom: 16px;
-	text-transform: uppercase;
-	text-decoration: none;
-	letter-spacing: 2px;
-	}
-
-
-
-
-
 	.content-foo a {
 	color: rgb(187, 187, 187);
 	border: 1px solid rgb(124, 124, 124);
@@ -529,15 +493,13 @@ color: red;
 
     section .bannerVideo {
     position: absolute;
-    background-image: url('../../../assets/img/fondo.jpg');
+    background-image: url('../../../assets/img/fondos/3estudiantes.jpg');
+    background-size:contain;
+    background-repeat: no-repeat;
     top: 0;
     left: 0;
     }
 
-    .bannerVideo img {
-        width: 50%;
-        height: 50%;
-    }
 
 }
 

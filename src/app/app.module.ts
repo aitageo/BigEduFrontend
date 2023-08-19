@@ -17,6 +17,7 @@ import { InstructorComponent } from './components/instructor/instructor.componen
 import { LoginGuard } from './guardians/login.guard';
 import { MapaComponent } from './components/mapa/mapa.component';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { FormatosComponent } from './formatos/formatos.component';
 
 
 
@@ -30,6 +31,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     NotFoundComponent,
     InstructorComponent,
     MapaComponent,
+    FormatosComponent,
     
     
    
