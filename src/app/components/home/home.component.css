@@ -13,7 +13,7 @@ section .bannerVideo
  left: 0;
  width: 100%;
  height: 100%;
- background-image: url('../../../assets/img/fondos/3estudiantes.jpg');
+  background-image: url('../../../assets/img/fondos/3estudiantes.jpg'); 
  background-repeat: no-repeat;
  background-size: cover;
 }
@@ -51,7 +51,7 @@ section .bannerVideo
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px 100px;
+    padding: 45px 100px;
 }
 
 .container header button:hover {
@@ -78,8 +78,8 @@ section .bannerVideo
 
 .logo:hover{
     animation: heartBeat;
-    animation-duration: 1s;
-    margin:  0 0.5rem;
+    animation-duration: 2s;
+    margin:  0 0rem;
     display: inline-block;
 }
 
@@ -144,22 +144,16 @@ section .bannerVideo
 {
     position: relative;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 20px 20px;
     text-decoration: none;
-    color: white;
+    color:#fff;
     font-size: 34px;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 24px;
     letter-spacing: 1px;
     margin: 10px;
 }
-/* .container .content .bannerText div p
-{
-    color: white;
-    font-size: 24px;
-    margin: 20px 10px;
 
-} */
 
 /*redes sociales*/
 
@@ -461,10 +455,7 @@ color: red;
         font-size: 1px;
     }
 
-    .bannerVideo img {
-        width: 20%;
-        height: 20%;
-    }
+   
 }
 
 @media  screen and (max-width: 720px) /* para abajo*/ {
@@ -476,6 +467,7 @@ color: red;
     .face.face2 {
         margin-bottom: 5rem;
     }
+
 
 
     .active {
@@ -491,14 +483,23 @@ color: red;
         height: 5%;
     }
 
+    section {
+        margin-top: 0px;
+    }
+   
+
     section .bannerVideo {
     position: absolute;
     background-image: url('../../../assets/img/fondos/3estudiantes.jpg');
-    background-size:contain;
+    background-size:cover;
+    background-position: right;
     background-repeat: no-repeat;
     top: 0;
     left: 0;
     }
+
+
+
 
 
 }

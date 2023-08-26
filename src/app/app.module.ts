@@ -11,7 +11,9 @@ import { LiderComponent } from './components/lider/lider.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UsersService } from './services/users.service';
 import { AuthInterceptorServiceService } from './services/auth-interceptor-service.service';
-import { NgOptimizedImage } from '@angular/common';
+// import { NgOptimizedImage } from '@angular/common';
+
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { InstructorComponent } from './components/instructor/instructor.component';
 import { LoginGuard } from './guardians/login.guard';
@@ -44,7 +46,8 @@ import { FormatosComponent } from './formatos/formatos.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    // NgbModule
     
   ],
   providers: [

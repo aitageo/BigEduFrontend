@@ -22,11 +22,7 @@
     margin:0;
     }
 
-    /* .container {
-        width: 100%;
-        height: 100%;
-    } */
-   
+ 
    
     .btn 
     {
@@ -61,22 +57,23 @@
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 380px;
+    max-width: 345px;
     position: absolute;
     top: 90px;
-    left: 450px;
+    left: 29rem;
     
-    /*La transicion va despues del codigo JS*/
+    /*La transicion va despues del codigo JS
     transition: left 500ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
-    }
+    */}
     
+
     .contenedor__login-register form{
     width: 100%;
     padding: 50px 20px;
     background: white;
     position: relative;
     border-radius: 20px;
-    margin-left: 80px; /*  se cambio para que se vea el rostro */
+    margin-left: 5rem; /*  se cambio para que se vea el rostro */
     }
     
     .contenedor__login-register form h2{
@@ -161,8 +158,8 @@
     /* Estilos para la sección de redes sociales fija */
 .social-media-fixed {
     position: fixed;
-    top: 50%; /* Ajusta según tu preferencia para la posición vertical */
-    left: 20px; /* Ajusta según tu preferencia para la posición horizontal */
+    top: 50%; 
+    left: 20px;
     transform: translateY(-50%); /* Centra verticalmente */
     z-index: 1000; /* Asegura que la sección aparezca sobre otros elementos */
   }
@@ -191,36 +188,25 @@
   }
   
 
+
+
+  /* Responsive  */
          
     
-    @media screen and (max-width: 850px){
+    @media screen and (max-width: 720px){
+
+    body {
+        background-image: url("src/assets/img/fondos/2estudiantes.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        }
     
     main{
-        margin-top: 50px;
-    }
-    
-    .caja__trasera{
-        max-width: 350px;
-        height: 300px;
-        flex-direction: column;
         margin: auto;
     }
     
-    .caja__trasera div{
-        margin: 0px;
+    .formulario__login  {
         position: absolute;
-    }
-    
-    
-    /*Formularios*/
-    
-    .contenedor__login-register{
-        top: -10px;
-        left: -5px;
-        margin: auto;
-    }
-    
-    .contenedor__login-register form{
-        position: relative;
+        left: 0;
     }
     }

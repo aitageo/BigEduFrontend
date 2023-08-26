@@ -1,51 +1,55 @@
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIG Edu-Login</title>    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIG Edu-Login</title>
 </head>
 
 <body>
-        <div class="container">
-            <img  class="logo" src="../../../assets/img/logo-bigedu.ico" alt="" routerLink="" name="Big Edu" srcset="">
-        </div>
-    <main>
-             <div class="contenedor__login-register">
-            <form class="formulario__login" id="formlg" #UserForm="ngForm" (ngSubmit)="LoginUser(UserForm)">
-                <h2><img src="https://www.sena.edu.co/Style%20Library/alayout/images/logoSena.png" width="80px" alt="" srcset=""></h2>
-                <div class="row align-items-stretch mb-5">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <input class="form-control" name="Nickname" #Nickname="ngModel" [(ngModel)]="login.nickname" type="text" placeholder="Usuario " required="required" data-validation-required-message="Ingrese su usuario" />
-                      <p class="help-block text-danger"></p>
-                    </div>
-                    <div class="form-group">
-                      <input class="form-control" name="contraseña" #Nickname="ngModel" [(ngModel)]="login.passuser" type="password" placeholder="Contraseña " required="required" data-validation-required-message="Ingrese su contraseña" autocomplete="current-password"/>
-                      <p class="help-block text-danger"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-center">
-                    <div *ngIf="message;" class="alert alert-danger mt-3">
-                        Hubo un error al iniciar sesión. Por favor, verifique sus credenciales e intente nuevamente.
-                        
-                    </div>
-                  <button type="submit" class="btn btn-primary text-uppercase"  name="login">Ingresar</button>
-                 
-                  
-                </div>
-              </form>
+  <div class="container">
+    <img class="logo" src="../../../assets/img/logo-bigedu.ico" alt="" routerLink="" name="Big Edu" srcset="">
+  </div>
+  <main>
+    <div class="contenedor__login-register">
+      <form class="formulario__login" id="formlg" #UserForm="ngForm" (ngSubmit)="LoginUser(UserForm)">
+        <h2><img src="https://www.sena.edu.co/Style%20Library/alayout/images/logoSena.png" width="80px" alt=""
+            srcset=""></h2>
+        <div class="row align-items-stretch mb-5">
+          <div class="col-md-12">
+            <div class="form-group">
+              <input class="form-control" name="Nickname" #Nickname="ngModel" [(ngModel)]="login.nickname" type="text"
+                placeholder="Usuario " required="required" data-validation-required-message="Ingrese su usuario" />
+              <p class="help-block text-danger"></p>
             </div>
-            <div class="social-media-fixed">
-              <ul class="social-icons">
-                <li><a href="https://www.facebook.com/"><i class='bx bxl-facebook-square bx-lg'></i></a></li>
-                <li><a href="https://www.instagram.com/"><i class='bx bxl-instagram-alt bx-lg'></i></a></li>
-                <li><a href="https://twitter.com/"><i class='bx bxl-twitter bx-lg'></i></a></li>
-              </ul>
+            <div class="form-group">
+              <input class="form-control" name="contraseña" #Nickname="ngModel" [(ngModel)]="login.passuser"
+                type="password" placeholder="Contraseña " required="required"
+                data-validation-required-message="Ingrese su contraseña" autocomplete="current-password" />
+              <p class="help-block text-danger"></p>
             </div>
-            
-        <div class="copy">
-            <div class="col s2"> © Copyright | BIG Edu</div>
+          </div>
         </div>
-    </main>
-        
+        <div class="text-center">
+          <div *ngIf="message;" class="alert alert-danger mt-3">
+            Hubo un error al iniciar sesión. Por favor, verifique sus credenciales e intente nuevamente.
+
+          </div>
+          <button type="submit" class="btn btn-primary text-uppercase" name="login">Ingresar</button>
+
+
+        </div>
+      </form>
+    </div>
+    <div class="social-media-fixed">
+      <ul class="social-icons">
+        <li><a href="https://www.facebook.com/"><i class='bx bxl-facebook-square bx-lg'></i></a></li>
+        <li><a href="https://www.instagram.com/"><i class='bx bxl-instagram-alt bx-lg'></i></a></li>
+        <li><a href="https://twitter.com/"><i class='bx bxl-twitter bx-lg'></i></a></li>
+      </ul>
+    </div>
+
+    <div class="copy">
+      <div class="col s2"> © Copyright | BIG Edu</div>
+    </div>
+  </main>
+
 </body>
